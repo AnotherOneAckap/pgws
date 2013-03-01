@@ -31,4 +31,26 @@ INSERT INTO status (id, name) VALUES
 
 ALTER TABLE wsd.event ADD CONSTRAINT event_fk_status_id FOREIGN KEY (status_id) REFERENCES ev.status(id);
 
+INSERT INTO i18n_def.page ( "code", "up_code", "class_id", "action_id", "sort", "uri", "tmpl", "pkg", "name" )
+VALUES ( 'ev.role_signup_list', 'main', 2, 1, 0, 'ev/role-signups$', 'ev/role_signup_list', 'ev', 'Управление подпиской ролей' );
+
+INSERT INTO i18n_def.page ( "code", "up_code", "class_id", "action_id", "sort", "uri", "tmpl", "pkg", "name" )
+VALUES ( 'ev.role_signup', 'main', 2, 1, 0, 'ev/role-signup/:i$', 'ev/role_signup', 'ev', 'Управление подпиской роли' );
+
+INSERT INTO method ( code, class_id, action_id, cache_id, rvf_id, args_exam, name )
+  VALUES ('ev.role_list',         2,         1,        1,      7,               '', 'Список ролей' ),
+         ('ev.role_signup_list',  2,         1,        1,      7, 'role_id = 1', 'Список подписок роли' ),
+         ('ev.kind_list',         2,         1,        1,      7,               '', 'Список видов событий' ),
+         ('ev.role_signup_ins',   2,         1,        1,      1,            'bla', 'Создание подписки роли' ),
+         ('ev.role_signup_del',   2,         1,        1,      1,           'blal', 'Удаление подписки роли' );
+
+INSERT INTO ev.role ( id, title ) VALUES
+( 1, 'admin' ),
+( 2, 'user'  );
+
+INSERT INTO ev.signature (  id, name, email, tmpl )
+	VALUES ( 1, 'First Signature', 'first_email@example.com', 'first_signature' );
+
+INSERT INTO ev.kind ( id, group_id, class_id,  def_prio, keep_days, has_spec, pkg, signature_id, tmpl, form_codes, name, name_fmt, name_count, spec_name, anno )
+  VALUES( 1, 2, 3, 4, 5, true, 7, 1, 'tmpl', ARRAY[1], 'first kind', '', 0, 'spec_name', 'anno' );
 /* ------------------------------------------------------------------------- */

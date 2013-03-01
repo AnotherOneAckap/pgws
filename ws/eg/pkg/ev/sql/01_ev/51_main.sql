@@ -76,6 +76,40 @@ $_$
 $_$;
 SELECT pg_c('f', 'create', 'Создать событие');
 
+CREATE TABLE IF NOT EXISTS ev.role (
+	id ws.d_id32,
+	title text,
+	CONSTRAINT role_pkey PRIMARY KEY ( id )
+);
+SELECT ws.pg_c( 't', 'ev.role', 'Эмуляция системы ролей для модуля ev' );
 
+CREATE FUNCTION ev.role_list()
+  RETURNS SETOF ev.role AS
+$BODY$
+	SELECT * FROM ev.role;
+$BODY$ LANGUAGE SQL;
 
+CREATE FUNCTION ev.role_signup_list( a_role_id ws.d_id32 )
+  RETURNS SETOF wsd.event_role_signup AS
+$BODY$
+  SELECT * FROM wsd.event_role_signup WHERE role_id = $1;
+$BODY$ LANGUAGE SQL; 
+
+CREATE FUNCTION ev.kind_list()
+  RETURNS SETOF ev.kind AS
+$BODY$
+  SELECT * FROM ev.kind;
+$BODY$ LANGUAGE SQL; 
+
+CREATE FUNCTION ev.role_signup_ins( a_role_id ws.d_id32, a_kind_id ws.d_id32, a_spec_id ws.d_id32, a_is_on BOOL DEFAULT true, a_prio INTEGER DEFAULT 1 )
+  RETURNS wsd.event_role_signup AS
+$BODY$
+	INSERT INTO wsd.event_role_signup ( role_id, kind_id, spec_id, is_on, prio ) VALUES ( $1, $2, $3, $4, $5 ) RETURNING *;
+$BODY$ LANGUAGE SQL;
+
+CREATE FUNCTION ev.role_signup_del( a_role_id ws.d_id32, a_kind_id ws.d_id32, a_spec_id ws.d_id32 )
+  RETURNS wsd.event_role_signup AS
+$BODY$
+	DELETE FROM wsd.event_role_signup WHERE role_id = $1 AND kind_id = $2 AND spec_id = $3 RETURNING *;
+$BODY$ LANGUAGE SQL;
 /* ------------------------------------------------------------------------- */
