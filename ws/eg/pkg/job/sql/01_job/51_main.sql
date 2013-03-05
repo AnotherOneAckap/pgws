@@ -22,7 +22,7 @@
 
 /* ------------------------------------------------------------------------- */
 CREATE OR REPLACE FUNCTION current2past (DATE) RETURNS SETOF wsd.job LANGUAGE 'sql' AS
-$_$ -- current2past - Удаление и возврат из wsd.job завершенных задач для помещения в wsd.job_dust, валидных до наступления заданной даты
+$_$ -- current2past - Удаление и возврат из wsd.job завершенных задач для помещения в wsd.job_past, валидных до наступления заданной даты
 -- Вызов:
 --   INSERT INTO wsd.job_past SELECT * FROM job.current2past(r_t.arg_date);
   DELETE FROM wsd.job USING job.status s, job.handler c
@@ -260,7 +260,7 @@ $_$
     UPDATE wsd.job SET
       run_pid = a_pid,
       run_ip = inet_client_addr(),
-      run_at = CURRENT_TIMESTAMP,
+      run_at = clock_timestamp(), --CURRENT_TIMESTAMP,
       status_id = job.const_status_id_process()
       WHERE
         id = r.id
@@ -374,7 +374,7 @@ $_$
     -- Сохраним новый статус
     UPDATE wsd.job SET
       status_id = a_status_id,
-      exit_at = CURRENT_TIMESTAMP
+      exit_at = clock_timestamp()
       WHERE id = a_id
         AND status_id = job.const_status_id_process() -- статус меняем только у выполняющихся задач
     ;
@@ -439,6 +439,7 @@ $_$
         v_ret := job.const_status_id_idle();
       END IF;
       PERFORM job.finish(r_job.id, v_ret, v_err);
+      PERFORM job.finished(r_job.id);
       IF v_err IS NULL THEN
         v_job_count := v_job_count + 1;
       END IF;
