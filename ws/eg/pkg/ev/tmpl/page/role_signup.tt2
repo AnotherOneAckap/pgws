@@ -9,22 +9,29 @@
 <ul>
 [% FOR signup IN signups %]
 [% event_kind = event_kinds_by_id.${ signup.kind_id }; %]
-	<li>[% event_kind.name %]<button class="signup-delete-button" kind_id="[% signup.kind_id %]" spec_id="[% signup.spec_id %]">удалить</button></li>	
+	<li>
+		[% event_kind.name %]
+[% IF signup.spec_id %]
+		, спецификация [% signup.spec_id %]
+[% END %]
+		<button class="signup-delete-button" kind_id="[% signup.kind_id %]" spec_id="[% signup.spec_id %]">удалить</button>
+	</li>	
 [% END %]
 </ul>
 
 <form id="signup-form">
 	<select id="kind_id">
 [% FOR ek IN event_kinds %]
-		<option value="[% ek.id %]">[% ek.name %]</option>
+		<option value="[% ek.id %]" has_spec="[% ek.has_spec %]">[% ek.name %]</option>
 [% END %]
 	</select>
+	<span id="spec_id">Спецификация:<input type="text" name="spec_id" /></span>
 	<input type="submit" value="Добавить" />
 </form>
 
 <script type="text/javascript">
 function signupFormOnSubmit() {
-		api( 'ev.role_signup_ins', 'div', location.reload, { prio:1, role_id:[% role_id %], kind_id:$('#kind_id').val(), spec_id:0 })
+		api( 'ev.role_signup_ins', 'div', location.reload, { prio:1, role_id:[% role_id %], kind_id:$('#kind_id').val(), spec_id: ( $('#spec_id').val() || 0 ) })
 		return false;
 }
 
@@ -34,8 +41,19 @@ function signupDeleteButtonOnClick( e ) {
 		api( 'ev.role_signup_del', 'div', location.reload, { role_id:[% role_id %], kind_id:kind_id, spec_id:spec_id });
 }
 
+function kindIdOnChange() {
+	if ( $(this).find('option:selected').attr('has_spec') == '0' ) {
+		$('#spec_id').hide();
+	}
+	else {
+		$('#spec_id').show();
+	}
+}
+
 $( function() {
 	$('#signup-form').submit( signupFormOnSubmit );
 	$('.signup-delete-button').click( signupDeleteButtonOnClick );
+	$('#kind_id').change( kindIdOnChange );
+	$('#kind_id').change();
 });
 </script>

@@ -83,6 +83,12 @@ CREATE TABLE IF NOT EXISTS ev.role (
 );
 SELECT ws.pg_c( 't', 'ev.role', 'Эмуляция системы ролей для модуля ev' );
 
+CREATE TABLE IF NOT EXISTS ev.account_role (
+	account_id ws.d_id32,
+	role_id ws.d_id32
+);
+SELECT ws.pg_c( 't', 'ev.account_role', 'Эмуляция системы ролей для модуля ev' );
+
 CREATE FUNCTION ev.role_list()
   RETURNS SETOF ev.role AS
 $BODY$
@@ -112,4 +118,51 @@ CREATE FUNCTION ev.role_signup_del( a_role_id ws.d_id32, a_kind_id ws.d_id32, a_
 $BODY$
 	DELETE FROM wsd.event_role_signup WHERE role_id = $1 AND kind_id = $2 AND spec_id = $3 RETURNING *;
 $BODY$ LANGUAGE SQL;
+
+CREATE OR REPLACE FUNCTION ev.tr_calculate_spec_id()
+  RETURNS trigger LANGUAGE plpgsql AS
+$BODY$
+	DECLARE
+		v_account wsd.account;	
+	BEGIN
+	  -- user login событие класса 3 вида 1
+  	IF NEW.kind_id = 1 THEN
+			-- выбираем пользователя с указанным в событии id
+			SELECT * INTO v_account FROM wsd.account WHERE id = NEW.created_by;
+			-- если логин начинается с pro_ то спецификация 1
+			IF position('pro_' in v_account.login) = 1 THEN
+				INSERT INTO wsd.event_spec ( event_id, spec_id ) VALUES ( NEW.id, 1 );
+			-- иначе 0
+			ELSE
+				INSERT INTO wsd.event_spec ( event_id, spec_id ) VALUES ( NEW.id, 0 );
+			END IF;
+			UPDATE wsd.event SET status_id = ev.const_status_id_rcpt() WHERE id = NEW.id;
+		END IF;
+		RETURN NEW;
+	END;
+$BODY$;
+
+CREATE OR REPLACE FUNCTION ev.tr_send_notifications()
+  RETURNS trigger LANGUAGE plpgsql AS
+$BODY$
+	DECLARE
+		v_account_id ws.d_id32;	
+		v_role_id ws.d_id32;	
+	BEGIN
+		-- определяем список адресатов события
+		FOR v_account_id, v_role_id IN SELECT a.id, r.id FROM wsd.account a 
+			JOIN ev.account_role ar ON ar.account_id = a.id 
+			JOIN ev.role r ON r.id = ar.role_id
+			JOIN wsd.event_role_signup ers ON ers.role_id = ar.role_id AND ers.kind_id = NEW.kind_id
+			-- specification
+			JOIN wsd.event_spec es ON es.event_id = NEW.id AND es.spec_id = ers.spec_id LOOP
+			-- создаём системные уведомления
+			INSERT INTO wsd.event_notify ( event_id, account_id, role_id, cause_id )
+				VALUES ( NEW.id, v_account_id, v_role_id, 1 );
+		END LOOP;
+		-- TODO меняем статус события?
+		-- TODO создаём задания на рассылку уведомлений согласно формату уведомлений
+		RETURN NEW;
+	END;
+$BODY$;
 /* ------------------------------------------------------------------------- */

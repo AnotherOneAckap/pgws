@@ -1,0 +1,9 @@
+[%
+	user_id = page.args.0;
+  notifications = api( 'ev.notifications_list', user_id => user_id );
+%]
+<ul>
+[% FOR n IN notifications %]
+	<li></li>	
+[% END %]
+</ul>
