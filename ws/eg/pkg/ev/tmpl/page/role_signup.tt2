@@ -31,7 +31,7 @@
 
 <script type="text/javascript">
 function signupFormOnSubmit() {
-		api( 'ev.role_signup_ins', 'div', location.reload, { prio:1, role_id:[% role_id %], kind_id:$('#kind_id').val(), spec_id: ( $('#spec_id').val() || 0 ) })
+		api( 'ev.role_signup_ins', 'div', location.reload, { prio:1, role_id:[% role_id %], kind_id:$('#kind_id').val(), spec_id: ( $('[name=spec_id]').val() || 0 ) })
 		return false;
 }
 

@@ -45,7 +45,9 @@ INSERT INTO method ( code, class_id, action_id, cache_id, rvf_id, args_exam, nam
          ('ev.role_signup_list',  2,         1,        1,      7, 'role_id = 1', 'Список подписок роли' ),
          ('ev.kind_list',         2,         1,        1,      7,               '', 'Список видов событий' ),
          ('ev.role_signup_ins',   2,         1,        1,      1,            'bla', 'Создание подписки роли' ),
-         ('ev.role_signup_del',   2,         1,        1,      1,           'blal', 'Удаление подписки роли' );
+         ('ev.role_signup_del',   2,         1,        1,      1,           'blal', 'Удаление подписки роли' ),
+         ('ev.notifications_list',2,         1,        1,      7, 'account_id = 1', 'Список уведомлений пользователя' ),
+         ('ev.new_notifications_count',2,         1,        1,      1, 'account_id = 1', 'Количество новых уведомлений пользователя' );
 
 INSERT INTO ev.role ( id, title ) VALUES
 ( 1, 'admin' ),

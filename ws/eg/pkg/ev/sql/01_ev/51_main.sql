@@ -119,29 +119,6 @@ $BODY$
 	DELETE FROM wsd.event_role_signup WHERE role_id = $1 AND kind_id = $2 AND spec_id = $3 RETURNING *;
 $BODY$ LANGUAGE SQL;
 
-CREATE OR REPLACE FUNCTION ev.tr_calculate_spec_id()
-  RETURNS trigger LANGUAGE plpgsql AS
-$BODY$
-	DECLARE
-		v_account wsd.account;	
-	BEGIN
-	  -- user login событие класса 3 вида 1
-  	IF NEW.kind_id = 1 THEN
-			-- выбираем пользователя с указанным в событии id
-			SELECT * INTO v_account FROM wsd.account WHERE id = NEW.created_by;
-			-- если логин начинается с pro_ то спецификация 1
-			IF position('pro_' in v_account.login) = 1 THEN
-				INSERT INTO wsd.event_spec ( event_id, spec_id ) VALUES ( NEW.id, 1 );
-			-- иначе 0
-			ELSE
-				INSERT INTO wsd.event_spec ( event_id, spec_id ) VALUES ( NEW.id, 0 );
-			END IF;
-			UPDATE wsd.event SET status_id = ev.const_status_id_rcpt() WHERE id = NEW.id;
-		END IF;
-		RETURN NEW;
-	END;
-$BODY$;
-
 CREATE OR REPLACE FUNCTION ev.tr_send_notifications()
   RETURNS trigger LANGUAGE plpgsql AS
 $BODY$
@@ -164,5 +141,49 @@ $BODY$
 		-- TODO создаём задания на рассылку уведомлений согласно формату уведомлений
 		RETURN NEW;
 	END;
+$BODY$;
+
+CREATE OR REPLACE FUNCTION ev.create_user_login( a_user_id ws.d_id32 )
+  RETURNS wsd.event LANGUAGE sql AS
+$BODY$
+  -- создаём событие user login
+  INSERT INTO wsd.event( status_id, kind_id, created_by, class_id )
+    VALUES ( ev.const_status_id_draft(), 1, $1, 3 ) RETURNING *;
+$BODY$;
+
+CREATE OR REPLACE FUNCTION ev.fire_user_login( a_user_id ws.d_id32 )
+  RETURNS wsd.event LANGUAGE plpgsql AS
+$BODY$
+	DECLARE
+		v_account wsd.account;	
+		v_event wsd.event;
+	BEGIN
+      -- создаём событие user login
+      INSERT INTO wsd.event( status_id, kind_id, created_by, class_id )
+        VALUES ( ev.const_status_id_draft(), 1, a_user_id, 3 ) RETURNING * INTO v_event;
+			-- выбираем пользователя с указанным в событии id
+			SELECT * INTO v_account FROM wsd.account WHERE id = a_user_id;
+			-- если логин начинается с pro_ то спецификация 1
+			IF position('pro_' in v_account.login) = 1 THEN
+				INSERT INTO wsd.event_spec ( event_id, spec_id ) VALUES ( v_event.id, 1 );
+			-- иначе 0
+			ELSE
+				INSERT INTO wsd.event_spec ( event_id, spec_id ) VALUES ( v_event.id, 0 );
+			END IF;
+			UPDATE wsd.event SET status_id = ev.const_status_id_rcpt() WHERE id = v_event.id;
+		RETURN v_event;
+  END;
+$BODY$;
+
+CREATE OR REPLACE FUNCTION ev.notifications_list( a_account_id ws.d_id32 )
+  RETURNS SETOF wsd.event_notify LANGUAGE sql AS
+$BODY$
+  SELECT * FROM wsd.event_notify WHERE account_id = $1;
+$BODY$;
+
+CREATE OR REPLACE FUNCTION ev.new_notifications_count( a_account_id ws.d_id32 )
+  RETURNS BIGINT LANGUAGE sql AS
+$BODY$
+  SELECT COUNT(*) FROM wsd.event_notify WHERE account_id = $1 AND is_new = TRUE;
 $BODY$;
 /* ------------------------------------------------------------------------- */

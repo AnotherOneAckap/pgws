@@ -21,14 +21,6 @@
 */
 
 CREATE TRIGGER
-  event_oninsert
-  AFTER INSERT ON wsd.event
-  FOR EACH ROW
-  WHEN (NEW.status_id = ev.const_status_id_draft())
-  EXECUTE PROCEDURE ev.tr_calculate_spec_id()
-;
-
-CREATE TRIGGER
   event_onupdate
   AFTER UPDATE ON wsd.event
   FOR EACH ROW

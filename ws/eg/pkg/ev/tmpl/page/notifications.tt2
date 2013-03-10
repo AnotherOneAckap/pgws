@@ -1,9 +1,9 @@
 [%
-	user_id = page.args.0;
-  notifications = api( 'ev.notifications_list', user_id => user_id );
+  notifications = api( 'ev.notifications_list', account_id => session.account_id );
+	INCLUDE block/ev/new_notifications.tt2
 %]
-<ul>
+<ol>
 [% FOR n IN notifications %]
-	<li></li>	
+	<li> Событие [% n.event_id %]</li>	
 [% END %]
-</ul>
+</ol>
