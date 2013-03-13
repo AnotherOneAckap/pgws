@@ -41,13 +41,13 @@ INSERT INTO i18n_def.page ( "code", "up_code", "class_id", "action_id", "sort", 
 VALUES ( 'ev.notifications', 'main', 2, 1, 0, 'ev/notifications$', 'ev/notifications', 'ev', 'Список уведомлений' );
 
 INSERT INTO method ( code, class_id, action_id, cache_id, rvf_id, args_exam, name )
-  VALUES ('ev.role_list',         2,         1,        1,      7,               '', 'Список ролей' ),
-         ('ev.role_signup_list',  2,         1,        1,      7, 'role_id = 1', 'Список подписок роли' ),
-         ('ev.kind_list',         2,         1,        1,      7,               '', 'Список видов событий' ),
-         ('ev.role_signup_ins',   2,         1,        1,      1,            'bla', 'Создание подписки роли' ),
-         ('ev.role_signup_del',   2,         1,        1,      1,           'blal', 'Удаление подписки роли' ),
-         ('ev.notifications_list',2,         1,        1,      7, 'account_id = 1', 'Список уведомлений пользователя' ),
-         ('ev.new_notifications_count',2,         1,        1,      1, 'account_id = 1', 'Количество новых уведомлений пользователя' );
+  VALUES ('ev.role_list',         2, 1,  1,      7,             '', 'Список ролей' ),
+         ('ev.role_signup_list',  2, 1,  1,      7,    'role_id=1', 'Список подписок роли' ),
+         ('ev.kind_list',         2, 1,  1,      7,             '', 'Список видов событий' ),
+         ('ev.role_signup_ins',   2, 1,  1,      1, 'role_id=1&kind_id=2&spec_id=1', 'Создание подписки роли' ),
+         ('ev.role_signup_del',   2, 1,  1,      1, 'role_id=1&kind_id=2&spec_id=1', 'Удаление подписки роли' ),
+         ('ev.notifications_list',2, 1,  1,      7, 'account_id=1', 'Список уведомлений пользователя' ),
+         ('ev.new_notifications_count',2, 1, 1, 1, 'account_id=1', 'Количество новых уведомлений пользователя' );
 
 INSERT INTO ev.role ( id, title ) VALUES
 ( 1, 'admin' ),
