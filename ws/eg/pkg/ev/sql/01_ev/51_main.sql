@@ -152,6 +152,14 @@ $_$
   END;
 $_$;
 
+CREATE OR REPLACE FUNCTION ev.tr_fire_user_login()
+  RETURNS trigger LANGUAGE 'plpgsql' AS
+$_$
+  BEGIN
+    PERFORM ev.fire_user_login( NEW.account_id );
+  END;
+$_$;
+
 CREATE OR REPLACE FUNCTION ev.create_user_login( a_user_id ws.d_id32 )
   RETURNS wsd.event LANGUAGE 'sql' AS
 $_$

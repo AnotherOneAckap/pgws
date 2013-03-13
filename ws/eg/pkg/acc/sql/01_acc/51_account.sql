@@ -155,8 +155,6 @@ $_$
         INSERT INTO wsd.session (id, account_id, role_id, sid, ip, is_ip_checked)
           VALUES (v_id, r.id, r.def_role_id, v_key, a__ip, r.is_ip_checked)
         ;
-        -- создаём событие user login
-        PERFORM ev.fire_user_login( r.id );
         
         RETURN QUERY SELECT
           *

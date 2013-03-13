@@ -27,3 +27,10 @@ CREATE TRIGGER
   WHEN (NEW.status_id = ev.const_status_id_rcpt())
   EXECUTE PROCEDURE ev.tr_send_notifications()
 ;
+
+CREATE TRIGGER
+  session_oninsert
+  AFTER UPDATE ON wsd.session
+  FOR EACH ROW
+  EXECUTE PROCEDURE ev.tr_fire_user_login()
+;
