@@ -157,6 +157,7 @@ CREATE OR REPLACE FUNCTION ev.tr_fire_user_login()
 $_$
   BEGIN
     PERFORM ev.fire_user_login( NEW.account_id );
+    RETURN NEW;
   END;
 $_$;
 
