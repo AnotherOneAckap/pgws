@@ -21,4 +21,4 @@
 */
 
 /* ------------------------------------------------------------------------- */
-DROP SCHEMA IF EXISTS ev CASCADE;
+DROP SCHEMA ev CASCADE;
