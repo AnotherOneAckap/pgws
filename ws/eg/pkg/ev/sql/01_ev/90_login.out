@@ -6,7 +6,10 @@
 -----------------
  (1,1,0,t,1)
 
-INSERT 0 1
+ account_name 
+--------------
+ Admin
+
  new_notifications_count 
 -------------------------
                        1
@@ -24,7 +27,10 @@ INSERT 0 1
  (1,1,1,t,1)
 
 INSERT 0 1
-INSERT 0 1
+ account_name 
+--------------
+ pro_admin
+
  new_notifications_count 
 -------------------------
                        2
