@@ -51,6 +51,7 @@ $_$
   END;
 $_$;
 
+
 /* ------------------------------------------------------------------------- */
 CREATE OR REPLACE FUNCTION ws.pg_register_proarg_old(a_code ws.d_code) RETURNS ws.d_code VOLATILE LANGUAGE 'plpgsql' AS
 $_$
@@ -172,6 +173,9 @@ $_$
       END IF;
       v_name := regexp_replace(split_part(v_def, ' ', 2), '^a_', '');
       v_type := split_part(v_def, ' ', 3);
+      IF NOT EXISTS(SELECT 1 FROM ws.dt WHERE code = dt_code(v_type)) THEN
+        PERFORM ws.pg_register_type(v_type);
+      END IF;     
       v_arg_anno := COALESCE(ws.pg_proarg_arg_anno(v_src, split_part(v_def, ' ', 2)), '');
       RAISE NOTICE '   column name=%, type=%, def=%, null=%, anno=%', v_name, v_type, v_default, v_allow_null, v_arg_anno;
       INSERT INTO ws.dt_part (dt_code, part_id, code, parent_code, anno, def_val, allow_null)
@@ -189,62 +193,100 @@ $_$
     r_pg_type pg_catalog.pg_type;
     v_code TEXT;
     v_type TEXT;
+    v_tpnm TEXT;
+    v_islist boolean;
     rec RECORD;
   BEGIN
     SELECT INTO r_pg_type * FROM pg_catalog.pg_type WHERE oid = a_oid;
     v_code := ws.pg_type_name(a_oid);
-/*    v_code := pg_catalog.format_type(a_oid, NULL);
-      IF r_pg_type.typnamespace = ws.pg_schema_oid(current_schema()) THEN
-         -- в этом случае схемы в имени не будет
-         v_code := current_schema() || '.'|| v_code;
+    IF r_pg_type.typtype in ('c','b','d') THEN
+      v_tpnm := CASE
+        WHEN r_pg_type.typtype = 'c' THEN
+          'Composite'
+        WHEN r_pg_type.typtype = 'b' THEN
+          'Base'
+        WHEN r_pg_type.typtype = 'd' THEN
+          'Domain'
+        END;
+      RAISE NOTICE 'Registering "%" type: % (%)', v_tpnm, v_code, a_oid;      
+      v_islist := FALSE;
+      IF r_pg_type.typtype = 'd' THEN
+        v_type := 
+         (SELECT pg_catalog.format_type(oid, typtypmod)
+          FROM pg_type
+          WHERE oid = r_pg_type.typbasetype);
+        v_type := split_part(v_type, ' ', 1);
+        v_islist := CASE WHEN v_type ~ '\[\]$' THEN TRUE ELSE FALSE END;
+        v_type := split_part(btrim(v_type, '[]'),' ', 1);
+        IF NOT EXISTS(SELECT 1 FROM ws.dt WHERE code = dt_code(v_type)) THEN
+          v_type := ws.pg_register_type(split_part(btrim(v_type, '[]'),' ', 1));
+        END IF;
+        IF ws.dt_parent_base_code(v_type) is null THEN
+          v_type := (select code from ws.dt where code = current_schema() || '.' || v_type);
+        END IF;
+        IF v_type IS NULL THEN
+          RAISE EXCEPTION 'Parent type for domain % is unknown', v_code;
+        END IF;
       END IF;
-*/
-    RAISE NOTICE 'Registering datatype: % (%)', v_code, a_oid;
-    INSERT INTO ws.dt (code, anno, is_complex)
-      VALUES (v_code, COALESCE(obj_description(r_pg_type.typrelid, 'pg_class'), obj_description(a_oid, 'pg_type'), v_code), true)
-    ;
-
-    FOR rec IN
-      SELECT a.attname
-        , pg_catalog.format_type(a.atttypid, a.atttypmod)
-        , (SELECT substring(pg_catalog.pg_get_expr(d.adbin, d.adrelid) for 128)
-          FROM pg_catalog.pg_attrdef d
-          WHERE d.adrelid = a.attrelid AND d.adnum = a.attnum AND a.atthasdef) as def_val
-        , a.attnotnull
-        , a.attnum
-        , pg_catalog.col_description(a.attrelid, a.attnum) as anno
-      FROM pg_catalog.pg_attribute a
-      WHERE a.attrelid = r_pg_type.typrelid AND a.attnum > 0 AND NOT a.attisdropped
-      ORDER BY a.attnum
-    LOOP
-      v_type := rec.format_type;
-      IF v_type ~ E'^timestamp[\\( ]' THEN
-        v_type := 'timestamp'; -- clean "timestamp(0) without time zone"
-      ELSIF v_type ~ E'^time[\\( ]' THEN
-        v_type := 'time'; -- clean "time without time zone"
-      ELSIF v_type ~ E'^numeric\\(' THEN
-        v_type := 'numeric'; -- clean "numeric(14,4)"
-      ELSIF v_type ~ E'^double' THEN
-        v_type := 'double'; -- clean "double precision"
-      ELSIF v_type ~ E'^character varying' THEN
-        v_type := 'text'; -- TODO: allow length
-      END IF;
-      RAISE NOTICE '   column % %', rec.attname, v_type;
-      IF ws.dt_code(v_type) IS NULL THEN
-        RAISE EXCEPTION 'Unknown type (%)', v_type;
-      END IF;
-      BEGIN
-        INSERT INTO ws.dt_part (dt_code, part_id, code, parent_code, anno, def_val, allow_null)
-          VALUES (v_code, rec.attnum, rec.attname, ws.dt_code(v_type), COALESCE(rec.anno, rec.attname), rec.def_val, NOT rec.attnotnull)
-        ;
-        EXCEPTION
-          WHEN CHECK_VIOLATION THEN
-            RAISE EXCEPTION 'Unregistered % part type (%)', v_code, v_type
+      INSERT INTO ws.dt (code, anno, is_complex, parent_code, is_list)
+        VALUES (v_code, COALESCE(obj_description(r_pg_type.typrelid, 'pg_class'), obj_description(a_oid, 'pg_type'), v_code), 
+          CASE WHEN r_pg_type.typtype = 'd' then false else true end
+        , v_type, v_islist)
+      ;
+      FOR rec IN
+        SELECT a.attname
+          , pg_catalog.format_type(a.atttypid, a.atttypmod)
+          , (SELECT substring(pg_catalog.pg_get_expr(d.adbin, d.adrelid) for 128)
+            FROM pg_catalog.pg_attrdef d
+            WHERE d.adrelid = a.attrelid AND d.adnum = a.attnum AND a.atthasdef) as def_val
+          , a.attnotnull
+          , a.attnum
+          , pg_catalog.col_description(a.attrelid, a.attnum) as anno
+        FROM pg_catalog.pg_attribute a
+        WHERE a.attrelid = r_pg_type.typrelid AND a.attnum > 0 AND NOT a.attisdropped
+        ORDER BY a.attnum
+      LOOP
+        v_islist := case when rec.format_type ~ '\[\]$' then true else false end;
+        v_type := btrim(rec.format_type, '[]');
+        IF v_type ~ E'^timestamp[\\( ]' THEN
+          v_type := 'timestamp'; -- clean "timestamp(0) without time zone"
+        ELSIF v_type ~ E'^time[\\( ]' THEN
+          v_type := 'time'; -- clean "time without time zone"
+        ELSIF v_type ~ E'^numeric\\(' THEN
+          v_type := 'numeric'; -- clean "numeric(14,4)"
+        ELSIF v_type ~ E'^double' THEN
+          v_type := 'double'; -- clean "double precision"
+        ELSIF v_type ~ E'^character varying' THEN
+          v_type := 'text'; -- TODO: allow length
+        END IF;
+        RAISE NOTICE '   column % %', rec.attname, v_type;
+        IF NOT EXISTS(SELECT 1 FROM ws.dt WHERE code IN ('ws.' || v_type, v_type)) THEN
+          v_type := ws.pg_register_type(v_type);
+          IF ws.dt_code(v_type) IS NULL THEN
+            RAISE EXCEPTION 'Unknown type (%)', v_type;
+          END IF;
+        END IF;
+        BEGIN
+          INSERT INTO ws.dt_part (dt_code, part_id, code, parent_code, anno, def_val, allow_null, is_list)
+            VALUES (v_code, rec.attnum, rec.attname, ws.dt_code(v_type), COALESCE(rec.anno, rec.attname), rec.def_val, NOT rec.attnotnull,v_islist)
           ;
-      END;
-    END LOOP;
+          EXCEPTION
+            WHEN CHECK_VIOLATION THEN
+              RAISE EXCEPTION 'Unregistered % part type (%)', v_code, v_type
+            ;
+        END;
+      END LOOP;
+    ELSE
+      RAISE EXCEPTION 'ERROR: OID = % неподдерживаемого типа "%"', a_oid, r_pg_type.typtype;
+    END IF;
     RETURN v_code;
   END;
+$_$;
+
+/* ------------------------------------------------------------------------- */
+CREATE OR REPLACE FUNCTION pg_register_type(a_type ws.d_code) RETURNS ws.d_code VOLATILE LANGUAGE 'sql' AS
+$_$
+  SELECT ws.pg_register_class(oid) FROM pg_type WHERE typname = $1 /* a_type */;
 $_$;
 
 /* ------------------------------------------------------------------------- */

@@ -21,8 +21,6 @@
 */
 
 /* ------------------------------------------------------------------------- */
-DELETE FROM ws.page_data             WHERE pkg = :'PKG';
-
 DELETE FROM ws.method                WHERE pkg = :'PKG';
 
 ALTER TABLE wsd.event DROP CONSTRAINT IF EXISTS event_fk_status_id;

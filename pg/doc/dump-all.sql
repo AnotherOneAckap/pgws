@@ -288,6 +288,13 @@ CREATE DOMAIN d_id32 AS integer
 
 
 --
+-- Name: DOMAIN d_id32; Type: COMMENT; Schema: ws; Owner: -
+--
+
+COMMENT ON DOMAIN d_id32 IS 'Идентификатор справочника';
+
+
+--
 -- Name: d_acl; Type: DOMAIN; Schema: ws; Owner: -
 --
 
@@ -295,10 +302,24 @@ CREATE DOMAIN d_acl AS d_id32;
 
 
 --
+-- Name: DOMAIN d_acl; Type: COMMENT; Schema: ws; Owner: -
+--
+
+COMMENT ON DOMAIN d_acl IS 'Уровень доступа';
+
+
+--
 -- Name: d_acls; Type: DOMAIN; Schema: ws; Owner: -
 --
 
 CREATE DOMAIN d_acls AS integer[];
+
+
+--
+-- Name: DOMAIN d_acls; Type: COMMENT; Schema: ws; Owner: -
+--
+
+COMMENT ON DOMAIN d_acls IS 'Массив уровней доступа';
 
 
 --
@@ -310,10 +331,24 @@ CREATE DOMAIN d_amount AS numeric(11,3)
 
 
 --
+-- Name: DOMAIN d_amount; Type: COMMENT; Schema: ws; Owner: -
+--
+
+COMMENT ON DOMAIN d_amount IS 'Количество товара';
+
+
+--
 -- Name: d_bitmask; Type: DOMAIN; Schema: ws; Owner: -
 --
 
 CREATE DOMAIN d_bitmask AS d_id32;
+
+
+--
+-- Name: DOMAIN d_bitmask; Type: COMMENT; Schema: ws; Owner: -
+--
+
+COMMENT ON DOMAIN d_bitmask IS 'Битовая маска';
 
 
 --
@@ -324,10 +359,24 @@ CREATE DOMAIN d_booleana AS boolean[];
 
 
 --
+-- Name: DOMAIN d_booleana; Type: COMMENT; Schema: ws; Owner: -
+--
+
+COMMENT ON DOMAIN d_booleana IS 'Массив boolean';
+
+
+--
 -- Name: d_class; Type: DOMAIN; Schema: ws; Owner: -
 --
 
 CREATE DOMAIN d_class AS d_id32;
+
+
+--
+-- Name: DOMAIN d_class; Type: COMMENT; Schema: ws; Owner: -
+--
+
+COMMENT ON DOMAIN d_class IS 'ID класса';
 
 
 --
@@ -346,11 +395,25 @@ CREATE DOMAIN d_cnt AS integer
 
 
 --
+-- Name: DOMAIN d_cnt; Type: COMMENT; Schema: ws; Owner: -
+--
+
+COMMENT ON DOMAIN d_cnt IS 'Количество элементов';
+
+
+--
 -- Name: d_code; Type: DOMAIN; Schema: ws; Owner: -
 --
 
 CREATE DOMAIN d_code AS text
 	CONSTRAINT d_code_check CHECK ((VALUE ~ '^[a-z\d][a-z\d\.\-_]*$'::text));
+
+
+--
+-- Name: DOMAIN d_code; Type: COMMENT; Schema: ws; Owner: -
+--
+
+COMMENT ON DOMAIN d_code IS 'Имя переменной';
 
 
 --
@@ -362,11 +425,25 @@ CREATE DOMAIN d_code_arg AS text
 
 
 --
+-- Name: DOMAIN d_code_arg; Type: COMMENT; Schema: ws; Owner: -
+--
+
+COMMENT ON DOMAIN d_code_arg IS 'Имя аргумента';
+
+
+--
 -- Name: d_code_like; Type: DOMAIN; Schema: ws; Owner: -
 --
 
 CREATE DOMAIN d_code_like AS text
 	CONSTRAINT d_code_like_check CHECK ((VALUE ~ '^[a-z\d\.\-_\%]+$'::text));
+
+
+--
+-- Name: DOMAIN d_code_like; Type: COMMENT; Schema: ws; Owner: -
+--
+
+COMMENT ON DOMAIN d_code_like IS 'Шаблон имени переменной';
 
 
 --
@@ -378,11 +455,25 @@ CREATE DOMAIN d_codea AS text[]
 
 
 --
+-- Name: DOMAIN d_codea; Type: COMMENT; Schema: ws; Owner: -
+--
+
+COMMENT ON DOMAIN d_codea IS 'Массив d_code';
+
+
+--
 -- Name: d_codei; Type: DOMAIN; Schema: ws; Owner: -
 --
 
 CREATE DOMAIN d_codei AS text
 	CONSTRAINT d_codei_check CHECK ((VALUE ~ '^[a-z\d][a-z\d\.\-_A-Z]*$'::text));
+
+
+--
+-- Name: DOMAIN d_codei; Type: COMMENT; Schema: ws; Owner: -
+--
+
+COMMENT ON DOMAIN d_codei IS 'Имя переменной в любом регистре';
 
 
 --
@@ -394,11 +485,25 @@ CREATE DOMAIN d_decimal_non_neg AS numeric
 
 
 --
+-- Name: DOMAIN d_decimal_non_neg; Type: COMMENT; Schema: ws; Owner: -
+--
+
+COMMENT ON DOMAIN d_decimal_non_neg IS 'Вещественное >= 0';
+
+
+--
 -- Name: d_decimal_positive; Type: DOMAIN; Schema: ws; Owner: -
 --
 
 CREATE DOMAIN d_decimal_positive AS numeric
 	CONSTRAINT d_decimal_positive_check CHECK ((VALUE > (0)::numeric));
+
+
+--
+-- Name: DOMAIN d_decimal_positive; Type: COMMENT; Schema: ws; Owner: -
+--
+
+COMMENT ON DOMAIN d_decimal_positive IS 'Вещественное > 0';
 
 
 --
@@ -410,10 +515,24 @@ CREATE DOMAIN d_email AS text
 
 
 --
+-- Name: DOMAIN d_email; Type: COMMENT; Schema: ws; Owner: -
+--
+
+COMMENT ON DOMAIN d_email IS 'Адрес email';
+
+
+--
 -- Name: d_emails; Type: DOMAIN; Schema: ws; Owner: -
 --
 
 CREATE DOMAIN d_emails AS text[];
+
+
+--
+-- Name: DOMAIN d_emails; Type: COMMENT; Schema: ws; Owner: -
+--
+
+COMMENT ON DOMAIN d_emails IS 'Список адресов email';
 
 
 --
@@ -425,6 +544,13 @@ CREATE DOMAIN d_errcode AS character(5)
 
 
 --
+-- Name: DOMAIN d_errcode; Type: COMMENT; Schema: ws; Owner: -
+--
+
+COMMENT ON DOMAIN d_errcode IS 'Код ошибки';
+
+
+--
 -- Name: d_format; Type: DOMAIN; Schema: ws; Owner: -
 --
 
@@ -432,10 +558,24 @@ CREATE DOMAIN d_format AS text;
 
 
 --
+-- Name: DOMAIN d_format; Type: COMMENT; Schema: ws; Owner: -
+--
+
+COMMENT ON DOMAIN d_format IS 'Формат для printf';
+
+
+--
 -- Name: d_id; Type: DOMAIN; Schema: ws; Owner: -
 --
 
 CREATE DOMAIN d_id AS integer;
+
+
+--
+-- Name: DOMAIN d_id; Type: COMMENT; Schema: ws; Owner: -
+--
+
+COMMENT ON DOMAIN d_id IS 'Идентификатор';
 
 
 --
@@ -447,6 +587,13 @@ CREATE DOMAIN d_id32a AS integer[]
 
 
 --
+-- Name: DOMAIN d_id32a; Type: COMMENT; Schema: ws; Owner: -
+--
+
+COMMENT ON DOMAIN d_id32a IS 'Массив d_id32';
+
+
+--
 -- Name: d_id_positive; Type: DOMAIN; Schema: ws; Owner: -
 --
 
@@ -455,10 +602,24 @@ CREATE DOMAIN d_id_positive AS integer
 
 
 --
+-- Name: DOMAIN d_id_positive; Type: COMMENT; Schema: ws; Owner: -
+--
+
+COMMENT ON DOMAIN d_id_positive IS 'Целое > 0';
+
+
+--
 -- Name: d_ida; Type: DOMAIN; Schema: ws; Owner: -
 --
 
 CREATE DOMAIN d_ida AS integer[];
+
+
+--
+-- Name: DOMAIN d_ida; Type: COMMENT; Schema: ws; Owner: -
+--
+
+COMMENT ON DOMAIN d_ida IS 'Массив d_id';
 
 
 --
@@ -470,11 +631,25 @@ CREATE DOMAIN d_lang AS text
 
 
 --
+-- Name: DOMAIN d_lang; Type: COMMENT; Schema: ws; Owner: -
+--
+
+COMMENT ON DOMAIN d_lang IS 'Идентификатор языка';
+
+
+--
 -- Name: d_login; Type: DOMAIN; Schema: ws; Owner: -
 --
 
 CREATE DOMAIN d_login AS text
 	CONSTRAINT d_login_check CHECK ((VALUE ~ '^[a-zA-Z0-9\.+_@\-]{5,}$'::text));
+
+
+--
+-- Name: DOMAIN d_login; Type: COMMENT; Schema: ws; Owner: -
+--
+
+COMMENT ON DOMAIN d_login IS 'Логин';
 
 
 --
@@ -485,10 +660,24 @@ CREATE DOMAIN d_money AS numeric(16,2);
 
 
 --
+-- Name: DOMAIN d_money; Type: COMMENT; Schema: ws; Owner: -
+--
+
+COMMENT ON DOMAIN d_money IS 'Деньги';
+
+
+--
 -- Name: d_moneya; Type: DOMAIN; Schema: ws; Owner: -
 --
 
 CREATE DOMAIN d_moneya AS numeric(16,2)[];
+
+
+--
+-- Name: DOMAIN d_moneya; Type: COMMENT; Schema: ws; Owner: -
+--
+
+COMMENT ON DOMAIN d_moneya IS 'Массив d_money';
 
 
 --
@@ -497,6 +686,13 @@ CREATE DOMAIN d_moneya AS numeric(16,2)[];
 
 CREATE DOMAIN d_path AS text
 	CONSTRAINT d_path_check CHECK ((VALUE ~ '^(|[a-z\d_][a-z\d\.\-_/]+)$'::text));
+
+
+--
+-- Name: DOMAIN d_path; Type: COMMENT; Schema: ws; Owner: -
+--
+
+COMMENT ON DOMAIN d_path IS 'Относительный путь';
 
 
 --
@@ -550,6 +746,13 @@ CREATE DOMAIN d_sid AS text;
 
 
 --
+-- Name: DOMAIN d_sid; Type: COMMENT; Schema: ws; Owner: -
+--
+
+COMMENT ON DOMAIN d_sid IS 'Идентификатор сессии';
+
+
+--
 -- Name: d_sort; Type: DOMAIN; Schema: ws; Owner: -
 --
 
@@ -558,10 +761,24 @@ CREATE DOMAIN d_sort AS integer
 
 
 --
+-- Name: DOMAIN d_sort; Type: COMMENT; Schema: ws; Owner: -
+--
+
+COMMENT ON DOMAIN d_sort IS 'Порядок сортировки';
+
+
+--
 -- Name: d_stamp; Type: DOMAIN; Schema: ws; Owner: -
 --
 
 CREATE DOMAIN d_stamp AS timestamp(0) without time zone;
+
+
+--
+-- Name: DOMAIN d_stamp; Type: COMMENT; Schema: ws; Owner: -
+--
+
+COMMENT ON DOMAIN d_stamp IS 'Момент времени с точностью до секунды';
 
 
 --
@@ -573,11 +790,25 @@ CREATE DOMAIN d_string AS text
 
 
 --
+-- Name: DOMAIN d_string; Type: COMMENT; Schema: ws; Owner: -
+--
+
+COMMENT ON DOMAIN d_string IS 'Текстовая строка';
+
+
+--
 -- Name: d_sub; Type: DOMAIN; Schema: ws; Owner: -
 --
 
 CREATE DOMAIN d_sub AS text
 	CONSTRAINT d_sub_check CHECK ((VALUE ~ '^([a-z\d][a-z\d\.\-_]+)|([A-Z\d][a-z\d\.\-_:A-Z]+)$'::text));
+
+
+--
+-- Name: DOMAIN d_sub; Type: COMMENT; Schema: ws; Owner: -
+--
+
+COMMENT ON DOMAIN d_sub IS 'Имя внешнего метода';
 
 
 --
@@ -588,10 +819,24 @@ CREATE DOMAIN d_text AS text;
 
 
 --
+-- Name: DOMAIN d_text; Type: COMMENT; Schema: ws; Owner: -
+--
+
+COMMENT ON DOMAIN d_text IS 'Текст';
+
+
+--
 -- Name: d_texta; Type: DOMAIN; Schema: ws; Owner: -
 --
 
 CREATE DOMAIN d_texta AS text[];
+
+
+--
+-- Name: DOMAIN d_texta; Type: COMMENT; Schema: ws; Owner: -
+--
+
+COMMENT ON DOMAIN d_texta IS 'Массив text';
 
 
 --
@@ -600,6 +845,13 @@ CREATE DOMAIN d_texta AS text[];
 
 CREATE DOMAIN d_zip AS text
 	CONSTRAINT d_zip_check CHECK ((VALUE ~ '^[a-zA-Zа-яА-я0-9][a-zA-Zа-яА-я0-9 -]{2,11}'::text));
+
+
+--
+-- Name: DOMAIN d_zip; Type: COMMENT; Schema: ws; Owner: -
+--
+
+COMMENT ON DOMAIN d_zip IS 'Почтовый индекс';
 
 
 --
@@ -612,6 +864,13 @@ CREATE TYPE t_acl_check AS (
 	code text,
 	name text
 );
+
+
+--
+-- Name: TYPE t_acl_check; Type: COMMENT; Schema: ws; Owner: -
+--
+
+COMMENT ON TYPE t_acl_check IS 'Результат проверки ACL';
 
 
 --
@@ -669,6 +928,27 @@ CREATE TYPE t_hashtable AS (
 	id text,
 	name text
 );
+
+
+--
+-- Name: TYPE t_hashtable; Type: COMMENT; Schema: ws; Owner: -
+--
+
+COMMENT ON TYPE t_hashtable IS 'Хэштаблица';
+
+
+--
+-- Name: COLUMN t_hashtable.id; Type: COMMENT; Schema: ws; Owner: -
+--
+
+COMMENT ON COLUMN t_hashtable.id IS 'ID';
+
+
+--
+-- Name: COLUMN t_hashtable.name; Type: COMMENT; Schema: ws; Owner: -
+--
+
+COMMENT ON COLUMN t_hashtable.name IS 'Название';
 
 
 --
@@ -794,6 +1074,13 @@ CREATE TYPE t_page_info AS (
 
 
 --
+-- Name: TYPE t_page_info; Type: COMMENT; Schema: ws; Owner: -
+--
+
+COMMENT ON TYPE t_page_info IS 'Параметры страницы';
+
+
+--
 -- Name: t_pg_object; Type: TYPE; Schema: ws; Owner: -
 --
 
@@ -824,6 +1111,13 @@ CREATE TYPE t_pg_proc_info AS (
 	args text,
 	args_pub text
 );
+
+
+--
+-- Name: TYPE t_pg_proc_info; Type: COMMENT; Schema: ws; Owner: -
+--
+
+COMMENT ON TYPE t_pg_proc_info IS 'Параметры хранимой процедуры';
 
 
 --
@@ -7462,7 +7756,7 @@ COMMENT ON COLUMN dt.is_sql IS 'Тип создан в БД';
 
 CREATE FUNCTION dt(a_code d_code DEFAULT NULL::text) RETURNS SETOF dt
     LANGUAGE sql STABLE
-    AS $_$ /* ws:ws:52_dt.sql / 55 */ 
+    AS $_$ /* ws:ws:52_dt.sql / 63 */ 
   SELECT * FROM ws.dt WHERE code LIKE COALESCE($1, '%') ORDER BY 1;
 $_$;
 
@@ -7479,10 +7773,18 @@ COMMENT ON FUNCTION dt(a_code d_code) IS 'Атрибуты типа по мас�
 --
 
 CREATE FUNCTION dt_code(a_code d_code) RETURNS d_code
-    LANGUAGE sql STABLE
-    AS $_$ /* ws:ws:52_dt.sql / 48 */ 
-  SELECT code FROM ws.dt WHERE code IN ($1, ws.pg_cs($1), 'ws.'||$1) ORDER BY 1;
-$_$;
+    LANGUAGE plpgsql
+    AS $$ /* ws:ws:52_dt.sql / 48 */ 
+  DECLARE
+    v_code TEXT;
+  BEGIN
+    SELECT code INTO v_code FROM ws.dt WHERE code IN (a_code, ws.pg_cs(a_code), 'ws.'||a_code) ORDER BY 1;
+    IF v_code IS NULL and a_code ~ '^d_' THEN
+      v_code := current_schema() || '.' || a_code;
+    END IF;
+    RETURN v_code;
+  END;
+$$;
 
 
 --
@@ -7546,7 +7848,7 @@ COMMENT ON COLUMN dt_facet.anno IS 'Аннотация ограничения';
 
 CREATE FUNCTION dt_facet(a_code d_code) RETURNS SETOF dt_facet
     LANGUAGE sql STABLE STRICT
-    AS $_$ /* ws:ws:52_dt.sql / 83 */ 
+    AS $_$ /* ws:ws:52_dt.sql / 91 */ 
   SELECT * FROM ws.dt_facet WHERE code = $1 ORDER BY 2;
 $_$;
 
@@ -7564,7 +7866,7 @@ COMMENT ON FUNCTION dt_facet(a_code d_code) IS 'Атрибуты огранич�
 
 CREATE FUNCTION dt_facet_insupd_trigger() RETURNS trigger
     LANGUAGE plpgsql STABLE
-    AS $$ /* ws:ws:60_trig.sql / 80 */ 
+    AS $$ /* ws:ws:60_trig.sql / 79 */ 
   DECLARE
     v_code ws.d_code;
   BEGIN
@@ -7583,34 +7885,33 @@ $$;
 --
 
 CREATE FUNCTION dt_insupd_trigger() RETURNS trigger
-    LANGUAGE plpgsql STABLE
+    LANGUAGE plpgsql
     AS $$ /* ws:ws:60_trig.sql / 25 */ 
   DECLARE
     v_code ws.d_code;
   BEGIN
-
     IF NEW.code = NEW.parent_code AND (NEW.is_complex OR NEW.is_list) THEN
       -- базовый тип - только скаляр
       RAISE EXCEPTION 'Unsupported value set: % % % %', NEW.code, NEW.parent_code, NEW.is_complex, NEW.is_list;
     END IF;
-
     IF NEW.parent_code IS NOT NULL THEN
       -- определить base_id если задан parent_code
       IF NEW.code = NEW.parent_code THEN
         NEW.base_code := NEW.code;
       ELSE
         v_code := ws.dt_parent_base_code(NEW.parent_code);
+        IF v_code IS NULL then
+           v_code := ws.pg_register_type(split_part(NEW.parent_code, '.', 2));
+           v_code := ws.dt_parent_base_code(NEW.parent_code);
+        END IF;
         IF v_code IS NULL THEN
           RAISE EXCEPTION 'Incorrect parent_code: %', NEW.parent_code;
         END IF;
         NEW.base_code := v_code;
       END IF;
     END IF;
-
     -- TODO: запретить изменение is_list и is_complex для parent
-
     -- NEW.anno := COALESCE(NEW.anno, NEW.code);
-
     RETURN NEW;
   END;
 $$;
@@ -7747,7 +8048,7 @@ COMMENT ON COLUMN dt_part.is_list IS 'Конструктор поля - масс
 
 CREATE FUNCTION dt_part(a_code d_code, a_part_id d_id32 DEFAULT 0) RETURNS SETOF dt_part
     LANGUAGE sql STABLE
-    AS $_$ /* ws:ws:52_dt.sql / 62 */ 
+    AS $_$ /* ws:ws:52_dt.sql / 70 */ 
   SELECT * FROM ws.dt_part WHERE dt_code = $1 AND $2 IN (part_id, 0) ORDER BY 2;
 $_$;
 
@@ -7765,7 +8066,7 @@ COMMENT ON FUNCTION dt_part(a_code d_code, a_part_id d_id32) IS 'Атрибут�
 
 CREATE FUNCTION dt_part_insupd_trigger() RETURNS trigger
     LANGUAGE plpgsql STABLE
-    AS $$ /* ws:ws:60_trig.sql / 58 */ 
+    AS $$ /* ws:ws:60_trig.sql / 57 */ 
   DECLARE
     v_code ws.d_code;
   BEGIN
@@ -7810,7 +8111,7 @@ COMMENT ON FUNCTION dt_part_parent_base_code(a_code d_code) IS 'Базовый �
 
 CREATE FUNCTION dt_parts(a_code d_code) RETURNS text
     LANGUAGE plpgsql STABLE
-    AS $$ /* ws:ws:52_dt.sql / 90 */ 
+    AS $$ /* ws:ws:52_dt.sql / 98 */ 
   DECLARE
     v_names TEXT[];
     r ws.dt_part;
@@ -7843,7 +8144,7 @@ COMMENT ON FUNCTION dt_parts(a_code d_code) IS 'Список полей комп
 
 CREATE FUNCTION dt_tree(a_code d_code) RETURNS SETOF d_code
     LANGUAGE sql STABLE
-    AS $$ /* ws:ws:52_dt.sql / 112 */ 
+    AS $$ /* ws:ws:52_dt.sql / 120 */ 
   WITH RECURSIVE dtree AS (
     SELECT d.*, ARRAY[code::text] as branches
       FROM ws.dt d
@@ -8075,7 +8376,7 @@ COMMENT ON COLUMN facet.anno IS 'Аннотация';
 
 CREATE FUNCTION facet(a_id d_id32) RETURNS SETOF facet
     LANGUAGE sql STABLE STRICT
-    AS $_$ /* ws:ws:52_dt.sql / 76 */ 
+    AS $_$ /* ws:ws:52_dt.sql / 84 */ 
   SELECT * FROM ws.facet WHERE $1 IN (0, id) ORDER BY 2;
 $_$;
 
@@ -8093,7 +8394,7 @@ COMMENT ON FUNCTION facet(a_id d_id32) IS 'Атрибуты ограничени
 
 CREATE FUNCTION facet_id(a_code d_codei) RETURNS d_id32
     LANGUAGE sql STABLE STRICT
-    AS $_$ /* ws:ws:52_dt.sql / 69 */ 
+    AS $_$ /* ws:ws:52_dt.sql / 77 */ 
   SELECT id FROM ws.facet WHERE code = $1;
 $_$;
 
@@ -8434,7 +8735,7 @@ COMMENT ON FUNCTION method_by_code(a_code d_code) IS 'Атрибуты мето�
 
 CREATE FUNCTION method_insupd_trigger() RETURNS trigger
     LANGUAGE plpgsql
-    AS $$ /* ws:ws:60_trig.sql / 110 */ 
+    AS $$ /* ws:ws:60_trig.sql / 109 */ 
   DECLARE
     r_proc ws.t_pg_proc_info;
     v_code text;
@@ -8486,7 +8787,7 @@ CREATE FUNCTION method_insupd_trigger() RETURNS trigger
     IF NEW.arg_dt_code IS NOT NULL AND NOT COALESCE(ws.dt_is_complex(NEW.arg_dt_code), false) THEN
         RAISE EXCEPTION 'Method arg type (%) must be complex', NEW.arg_dt_code;
     END IF;
-
+    
     RAISE NOTICE 'New method: %(%) -> %.', NEW.code_real, NEW.arg_dt_code, NEW.rv_dt_code;
     RETURN NEW;
   END;
@@ -8739,7 +9040,7 @@ COMMENT ON FUNCTION page_group_name(a_id d_id32) IS 'Название групп
 
 CREATE FUNCTION page_insupd_trigger() RETURNS trigger
     LANGUAGE plpgsql IMMUTABLE
-    AS $$ /* ws:ws:60_trig.sql / 95 */ 
+    AS $$ /* ws:ws:60_trig.sql / 94 */ 
   BEGIN
     IF NEW.uri_re IS NULL THEN
       NEW.uri_re := ws.mask2regexp(NEW.uri);
@@ -8933,7 +9234,7 @@ $_$;
 
 CREATE FUNCTION pg_proarg_arg_anno(a_src text, a_argname text) RETURNS text
     LANGUAGE sql IMMUTABLE
-    AS $_$ /* ws:ws:50_pg.sql / 106 */ 
+    AS $_$ /* ws:ws:50_pg.sql / 107 */ 
   SELECT (regexp_matches($1, E'--\\s+' || $2 || E':\\s+(.*)$', 'gm'))[1];
 $_$;
 
@@ -9000,68 +9301,100 @@ $_$;
 
 CREATE FUNCTION pg_register_class(a_oid oid) RETURNS d_code
     LANGUAGE plpgsql
-    AS $$ /* ws:ws:50_pg.sql / 187 */ 
+    AS $_$ /* ws:ws:50_pg.sql / 191 */ 
   DECLARE
     r_pg_type pg_catalog.pg_type;
     v_code TEXT;
     v_type TEXT;
+    v_tpnm TEXT;
+    v_islist boolean;
     rec RECORD;
   BEGIN
     SELECT INTO r_pg_type * FROM pg_catalog.pg_type WHERE oid = a_oid;
     v_code := ws.pg_type_name(a_oid);
-/*    v_code := pg_catalog.format_type(a_oid, NULL);
-      IF r_pg_type.typnamespace = ws.pg_schema_oid(current_schema()) THEN
-         -- в этом случае схемы в имени не будет
-         v_code := current_schema() || '.'|| v_code;
+    IF r_pg_type.typtype in ('c','b','d') THEN
+      v_tpnm := CASE
+        WHEN r_pg_type.typtype = 'c' THEN
+          'Composite'
+        WHEN r_pg_type.typtype = 'b' THEN
+          'Base'
+        WHEN r_pg_type.typtype = 'd' THEN
+          'Domain'
+        END;
+      RAISE NOTICE 'Registering "%" type: % (%)', v_tpnm, v_code, a_oid;      
+      v_islist := FALSE;
+      IF r_pg_type.typtype = 'd' THEN
+        v_type := 
+         (SELECT pg_catalog.format_type(oid, typtypmod)
+          FROM pg_type
+          WHERE oid = r_pg_type.typbasetype);
+        v_type := split_part(v_type, ' ', 1);
+        v_islist := CASE WHEN v_type ~ '\[\]$' THEN TRUE ELSE FALSE END;
+        v_type := split_part(btrim(v_type, '[]'),' ', 1);
+        IF NOT EXISTS(SELECT 1 FROM ws.dt WHERE code = dt_code(v_type)) THEN
+          v_type := ws.pg_register_type(split_part(btrim(v_type, '[]'),' ', 1));
+        END IF;
+        IF ws.dt_parent_base_code(v_type) is null THEN
+          v_type := (select code from ws.dt where code = current_schema() || '.' || v_type);
+        END IF;
+        IF v_type IS NULL THEN
+          RAISE EXCEPTION 'Parent type for domain % is unknown', v_code;
+        END IF;
       END IF;
-*/
-    RAISE NOTICE 'Registering datatype: % (%)', v_code, a_oid;
-    INSERT INTO ws.dt (code, anno, is_complex)
-      VALUES (v_code, COALESCE(obj_description(r_pg_type.typrelid, 'pg_class'), obj_description(a_oid, 'pg_type'), v_code), true)
-    ;
-
-    FOR rec IN
-      SELECT a.attname
-        , pg_catalog.format_type(a.atttypid, a.atttypmod)
-        , (SELECT substring(pg_catalog.pg_get_expr(d.adbin, d.adrelid) for 128)
-          FROM pg_catalog.pg_attrdef d
-          WHERE d.adrelid = a.attrelid AND d.adnum = a.attnum AND a.atthasdef) as def_val
-        , a.attnotnull
-        , a.attnum
-        , pg_catalog.col_description(a.attrelid, a.attnum) as anno
-      FROM pg_catalog.pg_attribute a
-      WHERE a.attrelid = r_pg_type.typrelid AND a.attnum > 0 AND NOT a.attisdropped
-      ORDER BY a.attnum
-    LOOP
-      v_type := rec.format_type;
-      IF v_type ~ E'^timestamp[\\( ]' THEN
-        v_type := 'timestamp'; -- clean "timestamp(0) without time zone"
-      ELSIF v_type ~ E'^time[\\( ]' THEN
-        v_type := 'time'; -- clean "time without time zone"
-      ELSIF v_type ~ E'^numeric\\(' THEN
-        v_type := 'numeric'; -- clean "numeric(14,4)"
-      ELSIF v_type ~ E'^double' THEN
-        v_type := 'double'; -- clean "double precision"
-      ELSIF v_type ~ E'^character varying' THEN
-        v_type := 'text'; -- TODO: allow length
-      END IF;
-      RAISE NOTICE '   column % %', rec.attname, v_type;
-      IF ws.dt_code(v_type) IS NULL THEN
-        RAISE EXCEPTION 'Unknown type (%)', v_type;
-      END IF;
-      BEGIN
-        INSERT INTO ws.dt_part (dt_code, part_id, code, parent_code, anno, def_val, allow_null)
-          VALUES (v_code, rec.attnum, rec.attname, ws.dt_code(v_type), COALESCE(rec.anno, rec.attname), rec.def_val, NOT rec.attnotnull)
-        ;
-        EXCEPTION
-          WHEN CHECK_VIOLATION THEN
-            RAISE EXCEPTION 'Unregistered % part type (%)', v_code, v_type
+      INSERT INTO ws.dt (code, anno, is_complex, parent_code, is_list)
+        VALUES (v_code, COALESCE(obj_description(r_pg_type.typrelid, 'pg_class'), obj_description(a_oid, 'pg_type'), v_code), 
+          CASE WHEN r_pg_type.typtype = 'd' then false else true end
+        , v_type, v_islist)
+      ;
+      FOR rec IN
+        SELECT a.attname
+          , pg_catalog.format_type(a.atttypid, a.atttypmod)
+          , (SELECT substring(pg_catalog.pg_get_expr(d.adbin, d.adrelid) for 128)
+            FROM pg_catalog.pg_attrdef d
+            WHERE d.adrelid = a.attrelid AND d.adnum = a.attnum AND a.atthasdef) as def_val
+          , a.attnotnull
+          , a.attnum
+          , pg_catalog.col_description(a.attrelid, a.attnum) as anno
+        FROM pg_catalog.pg_attribute a
+        WHERE a.attrelid = r_pg_type.typrelid AND a.attnum > 0 AND NOT a.attisdropped
+        ORDER BY a.attnum
+      LOOP
+        v_islist := case when rec.format_type ~ '\[\]$' then true else false end;
+        v_type := btrim(rec.format_type, '[]');
+        IF v_type ~ E'^timestamp[\\( ]' THEN
+          v_type := 'timestamp'; -- clean "timestamp(0) without time zone"
+        ELSIF v_type ~ E'^time[\\( ]' THEN
+          v_type := 'time'; -- clean "time without time zone"
+        ELSIF v_type ~ E'^numeric\\(' THEN
+          v_type := 'numeric'; -- clean "numeric(14,4)"
+        ELSIF v_type ~ E'^double' THEN
+          v_type := 'double'; -- clean "double precision"
+        ELSIF v_type ~ E'^character varying' THEN
+          v_type := 'text'; -- TODO: allow length
+        END IF;
+        RAISE NOTICE '   column % %', rec.attname, v_type;
+        IF NOT EXISTS(SELECT 1 FROM ws.dt WHERE code IN ('ws.' || v_type, v_type)) THEN
+          v_type := ws.pg_register_type(v_type);
+          IF ws.dt_code(v_type) IS NULL THEN
+            RAISE EXCEPTION 'Unknown type (%)', v_type;
+          END IF;
+        END IF;
+        BEGIN
+          INSERT INTO ws.dt_part (dt_code, part_id, code, parent_code, anno, def_val, allow_null, is_list)
+            VALUES (v_code, rec.attnum, rec.attname, ws.dt_code(v_type), COALESCE(rec.anno, rec.attname), rec.def_val, NOT rec.attnotnull,v_islist)
           ;
-      END;
-    END LOOP;
+          EXCEPTION
+            WHEN CHECK_VIOLATION THEN
+              RAISE EXCEPTION 'Unregistered % part type (%)', v_code, v_type
+            ;
+        END;
+      END LOOP;
+    ELSE
+      RAISE EXCEPTION 'ERROR: OID = % неподдерживаемого типа "%"', a_oid, r_pg_type.typtype;
+    END IF;
     RETURN v_code;
   END;
-$$;
+$_$;
 
 
 --
@@ -9070,7 +9403,7 @@ $$;
 
 CREATE FUNCTION pg_register_proarg(a_code d_code) RETURNS d_code
     LANGUAGE plpgsql
-    AS $_$ /* ws:ws:50_pg.sql / 111 */ 
+    AS $_$ /* ws:ws:50_pg.sql / 112 */ 
   DECLARE
     v_i INTEGER;
     v_code d_code;
@@ -9134,6 +9467,9 @@ CREATE FUNCTION pg_register_proarg(a_code d_code) RETURNS d_code
       END IF;
       v_name := regexp_replace(split_part(v_def, ' ', 2), '^a_', '');
       v_type := split_part(v_def, ' ', 3);
+      IF NOT EXISTS(SELECT 1 FROM ws.dt WHERE code = dt_code(v_type)) THEN
+        PERFORM ws.pg_register_type(v_type);
+      END IF;     
       v_arg_anno := COALESCE(ws.pg_proarg_arg_anno(v_src, split_part(v_def, ' ', 2)), '');
       RAISE NOTICE '   column name=%, type=%, def=%, null=%, anno=%', v_name, v_type, v_default, v_allow_null, v_arg_anno;
       INSERT INTO ws.dt_part (dt_code, part_id, code, parent_code, anno, def_val, allow_null)
@@ -9151,7 +9487,7 @@ $_$;
 
 CREATE FUNCTION pg_register_proarg_old(a_code d_code) RETURNS d_code
     LANGUAGE plpgsql
-    AS $$ /* ws:ws:50_pg.sql / 56 */ 
+    AS $$ /* ws:ws:50_pg.sql / 57 */ 
   DECLARE
     v_names text[];
     v_types oidvector;
@@ -9198,6 +9534,17 @@ CREATE FUNCTION pg_register_proarg_old(a_code d_code) RETURNS d_code
     RETURN v_code;
   END;
 $$;
+
+
+--
+-- Name: pg_register_type(d_code); Type: FUNCTION; Schema: ws; Owner: -
+--
+
+CREATE FUNCTION pg_register_type(a_type d_code) RETURNS d_code
+    LANGUAGE sql
+    AS $_$ /* ws:ws:50_pg.sql / 288 */ 
+  SELECT ws.pg_register_class(oid) FROM pg_type WHERE typname = $1 /* a_type */;
+$_$;
 
 
 --
@@ -10094,7 +10441,7 @@ $$;
 
 CREATE FUNCTION tr_exception() RETURNS trigger
     LANGUAGE plpgsql
-    AS $$ /* ws:ws:50_pg.sql / 268 */ 
+    AS $$ /* ws:ws:50_pg.sql / 310 */ 
   DECLARE
     v_text TEXT;
   BEGIN
@@ -10111,7 +10458,7 @@ $$;
 
 CREATE FUNCTION tr_notify() RETURNS trigger
     LANGUAGE plpgsql
-    AS $$ /* ws:ws:50_pg.sql / 254 */ 
+    AS $$ /* ws:ws:50_pg.sql / 296 */ 
   DECLARE
     v_channel TEXT;
   BEGIN
@@ -13196,6 +13543,7 @@ INSERT INTO page_name VALUES ('api.map', 'Описание страниц');
 INSERT INTO page_name VALUES ('api.xsd', 'Описание типов');
 INSERT INTO page_name VALUES ('api.class', 'Описание классов');
 INSERT INTO page_name VALUES ('api.smd1', 'Описание методов (JS)');
+INSERT INTO page_name VALUES ('api.markup', 'Примеры разметки страниц');
 INSERT INTO page_name VALUES ('api.class.single', 'Описание класса');
 INSERT INTO page_name VALUES ('login', 'Вход');
 INSERT INTO page_name VALUES ('logout', 'Выход');
@@ -13528,16 +13876,16 @@ INSERT INTO dt VALUES ('double', 'double', 'double', true, NULL, 'Длинное
 INSERT INTO dt VALUES ('bigint', 'bigint', 'bigint', true, NULL, 'Длинное целое', false, false, false);
 INSERT INTO dt VALUES ('json', 'json', 'json', true, NULL, 'Данные в формате JSON', false, false, false);
 INSERT INTO dt VALUES ('uuid', 'uuid', 'uuid', true, NULL, 'Universally Unique IDentifier', false, false, false);
+INSERT INTO dt VALUES ('bpchar', 'bpchar', 'bpchar', true, NULL, 'Blank Padded Char', false, false, false);
 INSERT INTO dt VALUES ('ws.d_id', 'integer', 'integer', true, NULL, 'Идентификатор', false, false, false);
-INSERT INTO dt VALUES ('ws.d_id32', 'smallint', 'smallint', true, NULL, 'Идентификатор справочника', false, false, false);
+INSERT INTO dt VALUES ('ws.d_id32', 'integer', 'integer', true, NULL, 'Идентификатор справочника', false, false, false);
 INSERT INTO dt VALUES ('ws.d_stamp', 'timestamp', 'timestamp', true, NULL, 'Момент времени с точностью до секунды', false, false, false);
 INSERT INTO dt VALUES ('ws.d_rating', 'numeric', 'numeric', true, NULL, 'Рейтинг компании', false, false, false);
-INSERT INTO dt VALUES ('ws.d_sort', 'smallint', 'smallint', true, NULL, 'Порядок сортировки', false, false, false);
+INSERT INTO dt VALUES ('ws.d_sort', 'integer', 'integer', true, NULL, 'Порядок сортировки', false, false, false);
 INSERT INTO dt VALUES ('ws.d_regexp', 'text', 'text', true, NULL, 'Регулярное выражение', false, false, false);
 INSERT INTO dt VALUES ('ws.d_decimal_positive', 'numeric', 'numeric', true, NULL, 'Вещественное > 0', false, false, false);
 INSERT INTO dt VALUES ('ws.d_id_positive', 'integer', 'integer', true, NULL, 'Целое > 0', false, false, false);
 INSERT INTO dt VALUES ('ws.d_decimal_non_neg', 'numeric', 'numeric', true, NULL, 'Вещественное >= 0', false, false, false);
-INSERT INTO dt VALUES ('ws.d_sid', 'text', 'text', true, NULL, 'Идентификатор сессии', false, false, false);
 INSERT INTO dt VALUES ('ws.d_zip', 'text', 'text', true, NULL, 'Почтовый индекс', false, false, false);
 INSERT INTO dt VALUES ('ws.d_text', 'text', 'text', true, NULL, 'Текст', false, false, false);
 INSERT INTO dt VALUES ('ws.d_string', 'text', 'text', true, NULL, 'Текстовая строка', false, false, false);
@@ -13545,9 +13893,8 @@ INSERT INTO dt VALUES ('ws.d_login', 'text', 'text', true, NULL, 'Логин', f
 INSERT INTO dt VALUES ('ws.d_email', 'text', 'text', true, NULL, 'Адрес email', false, false, false);
 INSERT INTO dt VALUES ('ws.d_emails', 'text', 'text', true, NULL, 'Список адресов email', true, false, false);
 INSERT INTO dt VALUES ('ws.d_path', 'text', 'text', true, NULL, 'Относительный путь', false, false, false);
-INSERT INTO dt VALUES ('ws.d_class', 'ws.d_id32', 'smallint', true, NULL, 'ID класса', false, false, false);
-INSERT INTO dt VALUES ('ws.d_non_neg_int', 'ws.d_id', 'integer', true, NULL, 'Неотрицательное целое', false, false, false);
-INSERT INTO dt VALUES ('ws.d_cnt', 'ws.d_non_neg_int', 'integer', true, NULL, 'Количество элементов', false, false, false);
+INSERT INTO dt VALUES ('ws.d_class', 'ws.d_id32', 'integer', true, NULL, 'ID класса', false, false, false);
+INSERT INTO dt VALUES ('ws.d_cnt', 'integer', 'integer', true, NULL, 'Количество элементов', false, false, false);
 INSERT INTO dt VALUES ('ws.d_amount', 'numeric', 'numeric', true, NULL, 'Количество товара', false, false, false);
 INSERT INTO dt VALUES ('ws.d_format', 'text', 'text', true, NULL, 'Формат для printf', false, false, false);
 INSERT INTO dt VALUES ('ws.d_code', 'text', 'text', true, NULL, 'Имя переменной', false, false, false);
@@ -13556,15 +13903,16 @@ INSERT INTO dt VALUES ('ws.d_codei', 'text', 'text', true, NULL, 'Имя пер�
 INSERT INTO dt VALUES ('ws.d_code_like', 'text', 'text', true, NULL, 'Шаблон имени переменной', false, false, false);
 INSERT INTO dt VALUES ('ws.d_sub', 'text', 'text', true, NULL, 'Имя внешнего метода', false, false, false);
 INSERT INTO dt VALUES ('ws.d_lang', 'text', 'text', true, NULL, 'Идентификатор языка', false, false, false);
-INSERT INTO dt VALUES ('ws.d_errcode', 'text', 'text', true, NULL, 'Код ошибки', false, false, false);
+INSERT INTO dt VALUES ('ws.d_errcode', 'bpchar', 'bpchar', true, NULL, 'Код ошибки', false, false, false);
 INSERT INTO dt VALUES ('ws.d_money', 'numeric', 'numeric', true, NULL, 'Деньги', false, false, false);
-INSERT INTO dt VALUES ('ws.t_hashtable', NULL, NULL, true, NULL, 'Хэштаблица', false, true, false);
-INSERT INTO dt VALUES ('ws.d_acl', 'ws.d_id32', 'smallint', true, NULL, 'Уровень доступа', false, false, false);
-INSERT INTO dt VALUES ('ws.d_acls', 'ws.d_acl', 'smallint', true, NULL, 'Массив уровней доступа', true, false, false);
-INSERT INTO dt VALUES ('ws.d_bitmask', 'ws.d_id32', 'smallint', true, NULL, 'Битовая маска', false, false, false);
+INSERT INTO dt VALUES ('ws.d_acl', 'ws.d_id32', 'integer', true, NULL, 'Уровень доступа', false, false, false);
+INSERT INTO dt VALUES ('ws.d_bitmask', 'ws.d_id32', 'integer', true, NULL, 'Битовая маска', false, false, false);
+INSERT INTO dt VALUES ('ws.t_pg_proc_info', NULL, NULL, true, NULL, 'Параметры хранимой процедуры', false, true, false);
+INSERT INTO dt VALUES ('ws.t_acl_check', NULL, NULL, true, NULL, 'Результат проверки ACL', false, true, false);
+INSERT INTO dt VALUES ('ws.d_acls', 'ws.d_acl', 'integer', true, NULL, 'Массив уровней доступа', true, false, false);
 INSERT INTO dt VALUES ('ws.d_booleana', 'boolean', 'boolean', true, NULL, 'Массив boolean', true, false, false);
 INSERT INTO dt VALUES ('ws.d_texta', 'text', 'text', true, NULL, 'Массив text', true, false, false);
-INSERT INTO dt VALUES ('ws.d_id32a', 'ws.d_id32', 'smallint', true, NULL, 'Массив d_id32', true, false, false);
+INSERT INTO dt VALUES ('ws.d_id32a', 'ws.d_id32', 'integer', true, NULL, 'Массив d_id32', true, false, false);
 INSERT INTO dt VALUES ('ws.d_codea', 'ws.d_code', 'text', true, NULL, 'Массив d_code', true, false, false);
 INSERT INTO dt VALUES ('ws.d_ida', 'ws.d_id', 'integer', true, NULL, 'Массив d_id', true, false, false);
 INSERT INTO dt VALUES ('ws.d_moneya', 'ws.d_money', 'numeric', true, NULL, 'Массив d_money', true, false, false);
@@ -13572,9 +13920,6 @@ INSERT INTO dt VALUES ('ws.z_uncache', NULL, NULL, true, NULL, 'Аргумент
 INSERT INTO dt VALUES ('ws.z_acl_check', NULL, NULL, true, NULL, 'Аргументы функций acl_check', false, true, false);
 INSERT INTO dt VALUES ('ws.z_store_get', NULL, NULL, true, NULL, 'Аргументы функций store_get', false, true, false);
 INSERT INTO dt VALUES ('ws.z_store_set', NULL, NULL, true, NULL, 'Аргументы функций store_set', false, true, false);
-INSERT INTO dt VALUES ('ws.t_page_info', NULL, NULL, true, NULL, 'Параметры страницы', false, true, false);
-INSERT INTO dt VALUES ('ws.t_pg_proc_info', NULL, NULL, true, NULL, 'Параметры хранимой процедуры', false, true, false);
-INSERT INTO dt VALUES ('ws.t_acl_check', NULL, NULL, true, NULL, 'Результат проверки ACL', false, true, false);
 INSERT INTO dt VALUES ('ws.t_date_info', NULL, NULL, true, NULL, 'Атрибуты даты', false, true, false);
 INSERT INTO dt VALUES ('ws.z_date_info', NULL, NULL, true, NULL, 'Aргументы метода ws.date_info', false, true, false);
 INSERT INTO dt VALUES ('ws.t_month_info', NULL, NULL, true, NULL, 'Атрибуты месяца', false, true, false);
@@ -13584,10 +13929,12 @@ INSERT INTO dt VALUES ('ws.ref', NULL, NULL, true, NULL, 'Справочник',
 INSERT INTO dt VALUES ('ws.z_ref_info', NULL, NULL, true, NULL, 'Aргументы метода ws.ref_info', false, true, false);
 INSERT INTO dt VALUES ('ws.ref_item', NULL, NULL, true, NULL, 'Позиция справочника', false, true, false);
 INSERT INTO dt VALUES ('ws.z_ref', NULL, NULL, true, NULL, 'Aргументы метода ws.ref', false, true, false);
+INSERT INTO dt VALUES ('ws.t_page_info', NULL, NULL, true, NULL, 'Параметры страницы', false, true, false);
 INSERT INTO dt VALUES ('ws.z_page_by_code', NULL, NULL, true, NULL, 'Aргументы метода ws.page_by_code', false, true, false);
 INSERT INTO dt VALUES ('ws.z_page_path', NULL, NULL, true, NULL, 'Aргументы метода ws.page_path', false, true, false);
 INSERT INTO dt VALUES ('ws.z_page_childs', NULL, NULL, true, NULL, 'Aргументы метода ws.page_childs', false, true, false);
 INSERT INTO dt VALUES ('ws.z_page_by_action', NULL, NULL, true, NULL, 'Aргументы метода ws.page_by_action', false, true, false);
+INSERT INTO dt VALUES ('ws.t_hashtable', NULL, NULL, true, NULL, 'Хэштаблица', false, true, false);
 INSERT INTO dt VALUES ('ws.z_page_tree', NULL, NULL, true, NULL, 'Aргументы метода ws.page_tree', false, true, false);
 INSERT INTO dt VALUES ('ws.class', NULL, NULL, true, NULL, 'Класс объекта', false, true, false);
 INSERT INTO dt VALUES ('ws.z_class', NULL, NULL, true, NULL, 'Aргументы метода ws.class', false, true, false);
@@ -13620,6 +13967,7 @@ INSERT INTO dt VALUES ('ws.z_dt', NULL, NULL, true, NULL, 'Aргументы м�
 INSERT INTO dt VALUES ('ws.z_acls_eff_ids', NULL, NULL, true, NULL, 'Aргументы метода ws.acls_eff_ids', false, true, false);
 INSERT INTO dt VALUES ('ws.z_acls_eff', NULL, NULL, true, NULL, 'Aргументы метода ws.acls_eff', false, true, false);
 INSERT INTO dt VALUES ('ws.z_system_acl', NULL, NULL, true, NULL, 'Aргументы метода ws.system_acl', false, true, false);
+INSERT INTO dt VALUES ('ws.d_sid', 'text', 'text', true, NULL, 'Идентификатор сессии', false, false, false);
 INSERT INTO dt VALUES ('ws.z_info_acl', NULL, NULL, true, NULL, 'Aргументы метода ws.info_acl', false, true, false);
 INSERT INTO dt VALUES ('cfg.z_cache', NULL, NULL, true, NULL, 'Aргументы метода cfg.cache', false, true, false);
 INSERT INTO dt VALUES ('fs.z_file_new_path_mk', NULL, NULL, true, NULL, 'Aргументы метода fs.file_new_path_mk', false, true, false);
@@ -13693,61 +14041,46 @@ INSERT INTO dt_facet VALUES ('ws.d_login', 4, '^[a-zA-Z0-9\.+_@\-]{5,}$', 'text'
 INSERT INTO dt_facet VALUES ('ws.d_email', 4, '(?:^$|^[^ ]+@[^ ]+\.[^ ]{2,6}$)', 'text', 'your@email.ru');
 INSERT INTO dt_facet VALUES ('ws.d_emails', 4, '(?:^$|^[^ ]+@[^ ]+\.[^ ]{2,6}$)', 'text', 'your@email.ru');
 INSERT INTO dt_facet VALUES ('ws.d_path', 4, '^(|[a-z\d_][a-z\d\.\-_/]+)$', 'text', NULL);
-INSERT INTO dt_facet VALUES ('ws.d_non_neg_int', 10, '0', 'integer', NULL);
 INSERT INTO dt_facet VALUES ('ws.d_code', 4, '^[a-z\d][a-z\d\.\-_]*$', 'text', NULL);
 INSERT INTO dt_facet VALUES ('ws.d_code_arg', 4, '^[a-z\d_][a-z\d\.\-_]*$', 'text', NULL);
 INSERT INTO dt_facet VALUES ('ws.d_codei', 4, '^[a-z\d][a-z\d\.\-_A-Z]*$', 'text', NULL);
 INSERT INTO dt_facet VALUES ('ws.d_code_like', 4, '^[a-z\d\.\-_\%]+$', 'text', NULL);
 INSERT INTO dt_facet VALUES ('ws.d_sub', 4, '^([a-z\d][a-z\d\.\-_]+)|([A-Z\d][a-z\d\.\-_:A-Z]+)$', 'text', NULL);
 INSERT INTO dt_facet VALUES ('ws.d_lang', 4, '^(?:ru|en)$', 'text', NULL);
-INSERT INTO dt_facet VALUES ('ws.d_errcode', 1, '5', 'text', NULL);
+INSERT INTO dt_facet VALUES ('ws.d_errcode', 1, '5', 'bpchar', NULL);
 
 
 --
 -- Data for Name: dt_part; Type: TABLE DATA; Schema: ws; Owner: -
 --
 
-INSERT INTO dt_part VALUES ('ws.t_hashtable', 1, 'id', 'ws.d_id32', 'smallint', true, NULL, 'ID', false);
-INSERT INTO dt_part VALUES ('ws.t_hashtable', 2, 'name', 'text', 'text', true, NULL, 'Название', false);
+INSERT INTO dt_part VALUES ('ws.t_pg_proc_info', 1, 'schema', 'text', 'text', true, NULL, 'schema', false);
+INSERT INTO dt_part VALUES ('ws.t_pg_proc_info', 2, 'name', 'text', 'text', true, NULL, 'name', false);
+INSERT INTO dt_part VALUES ('ws.t_pg_proc_info', 3, 'anno', 'text', 'text', true, NULL, 'anno', false);
+INSERT INTO dt_part VALUES ('ws.t_pg_proc_info', 4, 'rt_oid', 'oid', 'oid', true, NULL, 'rt_oid', false);
+INSERT INTO dt_part VALUES ('ws.t_pg_proc_info', 5, 'rt_name', 'text', 'text', true, NULL, 'rt_name', false);
+INSERT INTO dt_part VALUES ('ws.t_pg_proc_info', 6, 'is_set', 'boolean', 'boolean', true, NULL, 'is_set', false);
+INSERT INTO dt_part VALUES ('ws.t_pg_proc_info', 7, 'args', 'text', 'text', true, NULL, 'args', false);
+INSERT INTO dt_part VALUES ('ws.t_pg_proc_info', 8, 'args_pub', 'text', 'text', true, NULL, 'args_pub', false);
+INSERT INTO dt_part VALUES ('ws.t_acl_check', 1, 'value', 'integer', 'integer', true, NULL, 'value', false);
+INSERT INTO dt_part VALUES ('ws.t_acl_check', 2, 'id', 'integer', 'integer', true, NULL, 'id', false);
+INSERT INTO dt_part VALUES ('ws.t_acl_check', 3, 'code', 'text', 'text', true, NULL, 'code', false);
+INSERT INTO dt_part VALUES ('ws.t_acl_check', 4, 'name', 'text', 'text', true, NULL, 'name', false);
 INSERT INTO dt_part VALUES ('ws.z_uncache', 1, 'code', 'text', 'text', true, NULL, 'код метода', false);
 INSERT INTO dt_part VALUES ('ws.z_uncache', 2, 'key', 'text', 'text', true, NULL, 'ключ кэша', false);
 INSERT INTO dt_part VALUES ('ws.z_acl_check', 1, '_sid', 'text', 'text', true, NULL, 'ID сессии', false);
-INSERT INTO dt_part VALUES ('ws.z_acl_check', 2, 'class_id', 'ws.d_class', 'smallint', true, NULL, 'ID класса', false);
-INSERT INTO dt_part VALUES ('ws.z_acl_check', 3, 'action_id', 'ws.d_id32', 'smallint', true, NULL, 'ID акции', false);
+INSERT INTO dt_part VALUES ('ws.z_acl_check', 2, 'class_id', 'ws.d_class', 'integer', true, NULL, 'ID класса', false);
+INSERT INTO dt_part VALUES ('ws.z_acl_check', 3, 'action_id', 'ws.d_id32', 'integer', true, NULL, 'ID акции', false);
 INSERT INTO dt_part VALUES ('ws.z_acl_check', 4, 'id', 'ws.d_id', 'integer', true, NULL, 'ID объекта', false);
 INSERT INTO dt_part VALUES ('ws.z_acl_check', 5, 'id1', 'ws.d_id', 'integer', true, NULL, 'ID1 объекта', false);
 INSERT INTO dt_part VALUES ('ws.z_acl_check', 6, 'id2', 'text', 'text', true, NULL, 'ID2 объекта', false);
 INSERT INTO dt_part VALUES ('ws.z_store_get', 1, 'path', 'ws.d_path', 'text', true, NULL, 'ID данных', false);
 INSERT INTO dt_part VALUES ('ws.z_store_set', 1, 'path', 'ws.d_path', 'text', true, NULL, 'ID данных', false);
 INSERT INTO dt_part VALUES ('ws.z_store_set', 2, 'data', 'text', 'text', true, NULL, 'данные', false);
-INSERT INTO dt_part VALUES ('ws.t_page_info', 1, 'req', 'text', 'text', true, NULL, '', false);
-INSERT INTO dt_part VALUES ('ws.t_page_info', 2, 'code', 'ws.d_code', 'text', true, NULL, '', false);
-INSERT INTO dt_part VALUES ('ws.t_page_info', 3, 'up_code', 'ws.d_code', 'text', true, NULL, '', false);
-INSERT INTO dt_part VALUES ('ws.t_page_info', 4, 'class_id', 'ws.d_class', 'smallint', true, NULL, '', false);
-INSERT INTO dt_part VALUES ('ws.t_page_info', 5, 'action_id', 'ws.d_id32', 'smallint', true, NULL, '', false);
-INSERT INTO dt_part VALUES ('ws.t_page_info', 6, 'sort', 'ws.d_sort', 'smallint', true, NULL, '', false);
-INSERT INTO dt_part VALUES ('ws.t_page_info', 7, 'uri', 'ws.d_regexp', 'text', true, NULL, '', false);
-INSERT INTO dt_part VALUES ('ws.t_page_info', 8, 'tmpl', 'ws.d_path', 'text', true, NULL, '', false);
-INSERT INTO dt_part VALUES ('ws.t_page_info', 9, 'name', 'text', 'text', true, NULL, '', false);
-INSERT INTO dt_part VALUES ('ws.t_page_info', 10, 'uri_re', 'text', 'text', true, NULL, '', false);
-INSERT INTO dt_part VALUES ('ws.t_page_info', 11, 'uri_fmt', 'text', 'text', true, NULL, '', false);
-INSERT INTO dt_part VALUES ('ws.t_page_info', 12, 'args', 'text', 'text', true, NULL, '', true);
-INSERT INTO dt_part VALUES ('ws.t_pg_proc_info', 1, 'schema', 'text', 'text', true, NULL, '', false);
-INSERT INTO dt_part VALUES ('ws.t_pg_proc_info', 2, 'name', 'text', 'text', true, NULL, '', false);
-INSERT INTO dt_part VALUES ('ws.t_pg_proc_info', 3, 'anno', 'text', 'text', true, NULL, '', false);
-INSERT INTO dt_part VALUES ('ws.t_pg_proc_info', 4, 'rt_oid', 'oid', 'oid', true, NULL, '', false);
-INSERT INTO dt_part VALUES ('ws.t_pg_proc_info', 5, 'rt_name', 'text', 'text', true, NULL, '', false);
-INSERT INTO dt_part VALUES ('ws.t_pg_proc_info', 6, 'is_set', 'boolean', 'boolean', true, NULL, '', false);
-INSERT INTO dt_part VALUES ('ws.t_pg_proc_info', 7, 'args', 'text', 'text', true, NULL, '', false);
-INSERT INTO dt_part VALUES ('ws.t_pg_proc_info', 8, 'args_pub', 'text', 'text', true, NULL, '', false);
-INSERT INTO dt_part VALUES ('ws.t_acl_check', 1, 'value', 'integer', 'integer', true, NULL, '', false);
-INSERT INTO dt_part VALUES ('ws.t_acl_check', 2, 'id', 'integer', 'integer', true, NULL, '', false);
-INSERT INTO dt_part VALUES ('ws.t_acl_check', 3, 'code', 'text', 'text', true, NULL, '', false);
-INSERT INTO dt_part VALUES ('ws.t_acl_check', 4, 'name', 'text', 'text', true, NULL, '', false);
 INSERT INTO dt_part VALUES ('ws.t_date_info', 1, 'date', 'date', 'date', true, NULL, 'date', false);
-INSERT INTO dt_part VALUES ('ws.t_date_info', 2, 'day', 'ws.d_id32', 'smallint', true, NULL, 'day', false);
-INSERT INTO dt_part VALUES ('ws.t_date_info', 3, 'month', 'ws.d_id32', 'smallint', true, NULL, 'month', false);
-INSERT INTO dt_part VALUES ('ws.t_date_info', 4, 'year', 'ws.d_id32', 'smallint', true, NULL, 'year', false);
+INSERT INTO dt_part VALUES ('ws.t_date_info', 2, 'day', 'ws.d_id32', 'integer', true, NULL, 'day', false);
+INSERT INTO dt_part VALUES ('ws.t_date_info', 3, 'month', 'ws.d_id32', 'integer', true, NULL, 'month', false);
+INSERT INTO dt_part VALUES ('ws.t_date_info', 4, 'year', 'ws.d_id32', 'integer', true, NULL, 'year', false);
 INSERT INTO dt_part VALUES ('ws.t_date_info', 5, 'date_month', 'date', 'date', true, NULL, 'date_month', false);
 INSERT INTO dt_part VALUES ('ws.t_date_info', 6, 'date_year', 'date', 'date', true, NULL, 'date_year', false);
 INSERT INTO dt_part VALUES ('ws.t_date_info', 7, 'date_name', 'text', 'text', true, NULL, 'ДД месяц ГГГГ', false);
@@ -13762,8 +14095,8 @@ INSERT INTO dt_part VALUES ('ws.t_month_info', 2, 'date_month_last', 'date', 'da
 INSERT INTO dt_part VALUES ('ws.t_month_info', 3, 'date_month_prev', 'date', 'date', true, NULL, 'Дата - первое число предыдущего месяца', false);
 INSERT INTO dt_part VALUES ('ws.t_month_info', 4, 'date_month_next', 'date', 'date', true, NULL, 'Дата - первое число следующего месяца', false);
 INSERT INTO dt_part VALUES ('ws.t_month_info', 5, 'date_year', 'date', 'date', true, NULL, 'Дата - первое число года', false);
-INSERT INTO dt_part VALUES ('ws.t_month_info', 6, 'month', 'ws.d_id32', 'smallint', true, NULL, 'Номер месяца', false);
-INSERT INTO dt_part VALUES ('ws.t_month_info', 7, 'year', 'ws.d_id32', 'smallint', true, NULL, 'Год', false);
+INSERT INTO dt_part VALUES ('ws.t_month_info', 6, 'month', 'ws.d_id32', 'integer', true, NULL, 'Номер месяца', false);
+INSERT INTO dt_part VALUES ('ws.t_month_info', 7, 'year', 'ws.d_id32', 'integer', true, NULL, 'Год', false);
 INSERT INTO dt_part VALUES ('ws.t_month_info', 8, 'key', 'text', 'text', true, NULL, 'ГГГГММ', false);
 INSERT INTO dt_part VALUES ('ws.t_month_info', 9, 'month_name', 'text', 'text', true, NULL, 'месяц ГГГГ', false);
 INSERT INTO dt_part VALUES ('ws.t_month_info', 10, 'month_name_ic', 'text', 'text', true, NULL, 'Месяц ГГГГ', false);
@@ -13771,22 +14104,41 @@ INSERT INTO dt_part VALUES ('ws.z_month_info', 1, 'date', 'date', 'date', false,
 INSERT INTO dt_part VALUES ('ws.z_year_months', 1, 'date', 'date', 'date', false, '(''now''::text)', 'Дата', false);
 INSERT INTO dt_part VALUES ('ws.z_year_months', 2, 'date_min', 'date', 'date', true, NULL, 'Дата, месяцы раньше которой не включать', false);
 INSERT INTO dt_part VALUES ('ws.z_year_months', 3, 'date_max', 'date', 'date', true, NULL, 'Дата, месяцы позднее которой не включать', false);
-INSERT INTO dt_part VALUES ('ws.ref', 1, 'id', 'ws.d_id32', 'smallint', false, NULL, 'ID', false);
-INSERT INTO dt_part VALUES ('ws.ref', 2, 'class_id', 'ws.d_class', 'smallint', false, NULL, 'class_id', false);
+INSERT INTO dt_part VALUES ('ws.ref', 1, 'id', 'ws.d_id32', 'integer', false, NULL, 'ID', false);
+INSERT INTO dt_part VALUES ('ws.ref', 2, 'class_id', 'ws.d_class', 'integer', false, NULL, 'class_id', false);
 INSERT INTO dt_part VALUES ('ws.ref', 3, 'name', 'text', 'text', false, NULL, 'Название', false);
 INSERT INTO dt_part VALUES ('ws.ref', 4, 'code', 'ws.d_code', 'text', true, NULL, 'Метод доступа', false);
 INSERT INTO dt_part VALUES ('ws.ref', 5, 'updated_at', 'ws.d_stamp', 'timestamp', false, '''2010-01-01 00:00:00''::timestamp without time zone', 'Момент последнего изменения', false);
-INSERT INTO dt_part VALUES ('ws.z_ref_info', 1, 'id', 'ws.d_id32', 'smallint', false, NULL, '', false);
-INSERT INTO dt_part VALUES ('ws.ref_item', 1, 'ref_id', 'ws.d_id32', 'smallint', false, NULL, 'ID справочника', false);
-INSERT INTO dt_part VALUES ('ws.ref_item', 2, 'id', 'ws.d_id32', 'smallint', false, NULL, 'ID позиции', false);
-INSERT INTO dt_part VALUES ('ws.ref_item', 3, 'sort', 'ws.d_sort', 'smallint', true, NULL, 'Порядок сортировки', false);
+INSERT INTO dt_part VALUES ('ws.z_ref_info', 1, 'id', 'ws.d_id32', 'integer', false, NULL, '', false);
+INSERT INTO dt_part VALUES ('ws.ref_item', 1, 'ref_id', 'ws.d_id32', 'integer', false, NULL, 'ID справочника', false);
+INSERT INTO dt_part VALUES ('ws.ref_item', 2, 'id', 'ws.d_id32', 'integer', false, NULL, 'ID позиции', false);
+INSERT INTO dt_part VALUES ('ws.ref_item', 3, 'sort', 'ws.d_sort', 'integer', true, NULL, 'Порядок сортировки', false);
 INSERT INTO dt_part VALUES ('ws.ref_item', 4, 'name', 'text', 'text', false, NULL, 'Название', false);
-INSERT INTO dt_part VALUES ('ws.ref_item', 5, 'group_id', 'ws.d_id32', 'smallint', false, '1', 'Внутренний ID группы', false);
+INSERT INTO dt_part VALUES ('ws.ref_item', 5, 'group_id', 'ws.d_id32', 'integer', false, '1', 'Внутренний ID группы', false);
 INSERT INTO dt_part VALUES ('ws.ref_item', 6, 'deleted_at', 'ws.d_stamp', 'timestamp', true, NULL, 'Момент удаления', false);
-INSERT INTO dt_part VALUES ('ws.z_ref', 1, 'id', 'ws.d_id32', 'smallint', false, NULL, '', false);
-INSERT INTO dt_part VALUES ('ws.z_ref', 2, 'item_id', 'ws.d_id32', 'smallint', false, '0', '', false);
-INSERT INTO dt_part VALUES ('ws.z_ref', 3, 'group_id', 'ws.d_id32', 'smallint', false, '0', '', false);
+INSERT INTO dt_part VALUES ('ws.z_ref', 1, 'id', 'ws.d_id32', 'integer', false, NULL, '', false);
+INSERT INTO dt_part VALUES ('ws.z_ref', 2, 'item_id', 'ws.d_id32', 'integer', false, '0', '', false);
+INSERT INTO dt_part VALUES ('ws.z_ref', 3, 'group_id', 'ws.d_id32', 'integer', false, '0', '', false);
 INSERT INTO dt_part VALUES ('ws.z_ref', 4, 'active_only', 'boolean', 'boolean', false, 'true', '', false);
+INSERT INTO dt_part VALUES ('ws.t_page_info', 1, 'code', 'ws.d_code', 'text', true, NULL, 'code', false);
+INSERT INTO dt_part VALUES ('ws.t_page_info', 2, 'up_code', 'ws.d_code', 'text', true, NULL, 'up_code', false);
+INSERT INTO dt_part VALUES ('ws.t_page_info', 3, 'class_id', 'ws.d_class', 'integer', true, NULL, 'class_id', false);
+INSERT INTO dt_part VALUES ('ws.t_page_info', 4, 'action_id', 'ws.d_id32', 'integer', true, NULL, 'action_id', false);
+INSERT INTO dt_part VALUES ('ws.t_page_info', 5, 'group_id', 'ws.d_id32', 'integer', true, NULL, 'group_id', false);
+INSERT INTO dt_part VALUES ('ws.t_page_info', 6, 'sort', 'ws.d_sort', 'integer', true, NULL, 'sort', false);
+INSERT INTO dt_part VALUES ('ws.t_page_info', 7, 'uri', 'ws.d_regexp', 'text', true, NULL, 'uri', false);
+INSERT INTO dt_part VALUES ('ws.t_page_info', 8, 'tmpl', 'ws.d_path', 'text', true, NULL, 'tmpl', false);
+INSERT INTO dt_part VALUES ('ws.t_page_info', 9, 'id_fixed', 'ws.d_id', 'integer', true, NULL, 'id_fixed', false);
+INSERT INTO dt_part VALUES ('ws.t_page_info', 10, 'id_session', 'ws.d_code', 'text', true, NULL, 'id_session', false);
+INSERT INTO dt_part VALUES ('ws.t_page_info', 11, 'is_hidden', 'boolean', 'boolean', true, NULL, 'is_hidden', false);
+INSERT INTO dt_part VALUES ('ws.t_page_info', 12, 'target', 'text', 'text', true, NULL, 'target', false);
+INSERT INTO dt_part VALUES ('ws.t_page_info', 13, 'uri_re', 'text', 'text', true, NULL, 'uri_re', false);
+INSERT INTO dt_part VALUES ('ws.t_page_info', 14, 'uri_fmt', 'text', 'text', true, NULL, 'uri_fmt', false);
+INSERT INTO dt_part VALUES ('ws.t_page_info', 15, 'pkg', 'text', 'text', true, NULL, 'pkg', false);
+INSERT INTO dt_part VALUES ('ws.t_page_info', 16, 'name', 'text', 'text', true, NULL, 'name', false);
+INSERT INTO dt_part VALUES ('ws.t_page_info', 17, 'req', 'text', 'text', true, NULL, 'req', false);
+INSERT INTO dt_part VALUES ('ws.t_page_info', 18, 'args', 'text', 'text', true, NULL, 'args', true);
+INSERT INTO dt_part VALUES ('ws.t_page_info', 19, 'group_name', 'text', 'text', true, NULL, 'group_name', false);
 INSERT INTO dt_part VALUES ('ws.z_page_by_code', 1, 'code', 'text', 'text', false, NULL, '', false);
 INSERT INTO dt_part VALUES ('ws.z_page_by_code', 2, 'id', 'text', 'text', true, NULL, '', false);
 INSERT INTO dt_part VALUES ('ws.z_page_by_code', 3, 'id1', 'text', 'text', true, NULL, '', false);
@@ -13799,25 +14151,27 @@ INSERT INTO dt_part VALUES ('ws.z_page_childs', 1, 'code', 'text', 'text', true,
 INSERT INTO dt_part VALUES ('ws.z_page_childs', 2, 'id', 'text', 'text', true, NULL, '', false);
 INSERT INTO dt_part VALUES ('ws.z_page_childs', 3, 'id1', 'text', 'text', true, NULL, '', false);
 INSERT INTO dt_part VALUES ('ws.z_page_childs', 4, 'id2', 'text', 'text', true, NULL, '', false);
-INSERT INTO dt_part VALUES ('ws.z_page_by_action', 1, 'class_id', 'ws.d_class', 'smallint', false, '0', '', false);
-INSERT INTO dt_part VALUES ('ws.z_page_by_action', 2, 'action_id', 'ws.d_id32', 'smallint', false, '0', '', false);
+INSERT INTO dt_part VALUES ('ws.z_page_by_action', 1, 'class_id', 'ws.d_class', 'integer', false, '0', '', false);
+INSERT INTO dt_part VALUES ('ws.z_page_by_action', 2, 'action_id', 'ws.d_id32', 'integer', false, '0', '', false);
 INSERT INTO dt_part VALUES ('ws.z_page_by_action', 3, 'id', 'text', 'text', true, NULL, '', false);
 INSERT INTO dt_part VALUES ('ws.z_page_by_action', 4, 'id1', 'text', 'text', true, NULL, '', false);
 INSERT INTO dt_part VALUES ('ws.z_page_by_action', 5, 'id2', 'text', 'text', true, NULL, '', false);
+INSERT INTO dt_part VALUES ('ws.t_hashtable', 1, 'id', 'text', 'text', true, NULL, 'ID', false);
+INSERT INTO dt_part VALUES ('ws.t_hashtable', 2, 'name', 'text', 'text', true, NULL, 'Название', false);
 INSERT INTO dt_part VALUES ('ws.z_page_tree', 1, 'code', 'text', 'text', true, NULL, '', false);
-INSERT INTO dt_part VALUES ('ws.class', 1, 'id', 'ws.d_class', 'smallint', false, NULL, 'ID класса', false);
-INSERT INTO dt_part VALUES ('ws.class', 2, 'up_id', 'ws.d_class', 'smallint', true, NULL, 'ID класса-предка', false);
+INSERT INTO dt_part VALUES ('ws.class', 1, 'id', 'ws.d_class', 'integer', false, NULL, 'ID класса', false);
+INSERT INTO dt_part VALUES ('ws.class', 2, 'up_id', 'ws.d_class', 'integer', true, NULL, 'ID класса-предка', false);
 INSERT INTO dt_part VALUES ('ws.class', 3, 'id_count', 'ws.d_cnt', 'integer', false, '0', 'Количество идентификаторов экземпляра класса', false);
 INSERT INTO dt_part VALUES ('ws.class', 4, 'is_ext', 'boolean', 'boolean', false, NULL, 'ID экземпляра предка входит в ID экземпляра', false);
-INSERT INTO dt_part VALUES ('ws.class', 5, 'sort', 'ws.d_sort', 'smallint', true, NULL, 'Сортировка в списке классов', false);
+INSERT INTO dt_part VALUES ('ws.class', 5, 'sort', 'ws.d_sort', 'integer', true, NULL, 'Сортировка в списке классов', false);
 INSERT INTO dt_part VALUES ('ws.class', 6, 'code', 'ws.d_code', 'text', false, NULL, 'Код класса', false);
 INSERT INTO dt_part VALUES ('ws.class', 7, 'name', 'text', 'text', false, NULL, 'Название класса', false);
-INSERT INTO dt_part VALUES ('ws.z_class', 1, 'id', 'ws.d_class', 'smallint', false, '0', '', false);
+INSERT INTO dt_part VALUES ('ws.z_class', 1, 'id', 'ws.d_class', 'integer', false, '0', '', false);
 INSERT INTO dt_part VALUES ('ws.method', 1, 'code', 'ws.d_code', 'text', false, NULL, 'внешнее имя метода', false);
-INSERT INTO dt_part VALUES ('ws.method', 2, 'class_id', 'ws.d_class', 'smallint', false, NULL, 'ID класса, к которому относится метод', false);
-INSERT INTO dt_part VALUES ('ws.method', 3, 'action_id', 'ws.d_id32', 'smallint', false, NULL, 'ID акции, которой соответствует метод', false);
-INSERT INTO dt_part VALUES ('ws.method', 4, 'cache_id', 'ws.d_id32', 'smallint', false, NULL, 'ID кэша, в котором размещается результат вызова метода', false);
-INSERT INTO dt_part VALUES ('ws.method', 5, 'rvf_id', 'ws.d_id32', 'smallint', false, NULL, 'ID формата результата (для SQL-методов)', false);
+INSERT INTO dt_part VALUES ('ws.method', 2, 'class_id', 'ws.d_class', 'integer', false, NULL, 'ID класса, к которому относится метод', false);
+INSERT INTO dt_part VALUES ('ws.method', 3, 'action_id', 'ws.d_id32', 'integer', false, NULL, 'ID акции, которой соответствует метод', false);
+INSERT INTO dt_part VALUES ('ws.method', 4, 'cache_id', 'ws.d_id32', 'integer', false, NULL, 'ID кэша, в котором размещается результат вызова метода', false);
+INSERT INTO dt_part VALUES ('ws.method', 5, 'rvf_id', 'ws.d_id32', 'integer', false, NULL, 'ID формата результата (для SQL-методов)', false);
 INSERT INTO dt_part VALUES ('ws.method', 6, 'is_write', 'boolean', 'boolean', false, 'false', 'метод меняет БД', false);
 INSERT INTO dt_part VALUES ('ws.method', 7, 'is_i18n', 'boolean', 'boolean', false, 'false', 'метод поддерживает интернационализацию', false);
 INSERT INTO dt_part VALUES ('ws.method', 8, 'is_sql', 'boolean', 'boolean', false, 'true', 'метод реализован как sql function', false);
@@ -13835,22 +14189,22 @@ INSERT INTO dt_part VALUES ('ws.z_method_lookup', 2, 'page', 'ws.d_cnt', 'intege
 INSERT INTO dt_part VALUES ('ws.z_method_lookup', 3, 'by', 'ws.d_cnt', 'integer', false, '0', '', false);
 INSERT INTO dt_part VALUES ('ws.z_class_id', 1, 'code', 'ws.d_code', 'text', false, NULL, '', false);
 INSERT INTO dt_part VALUES ('ws.z_page_by_uri', 1, 'uri', 'text', 'text', false, '', '', false);
-INSERT INTO dt_part VALUES ('i18n_def.error', 1, 'code', 'ws.d_errcode', 'text', true, NULL, 'Код ошибки', false);
+INSERT INTO dt_part VALUES ('i18n_def.error', 1, 'code', 'ws.d_errcode', 'bpchar', true, NULL, 'Код ошибки', false);
 INSERT INTO dt_part VALUES ('i18n_def.error', 2, 'id_count', 'ws.d_cnt', 'integer', true, '0', 'Количество аргументов в строке сообщения', false);
 INSERT INTO dt_part VALUES ('i18n_def.error', 3, 'message', 'ws.d_format', 'text', true, NULL, 'Форматированная строка сообщения об ошибке', false);
-INSERT INTO dt_part VALUES ('ws.z_error_info', 1, 'code', 'ws.d_errcode', 'text', false, NULL, '', false);
-INSERT INTO dt_part VALUES ('ws.method_rv_format', 1, 'id', 'ws.d_id32', 'smallint', false, NULL, 'ID формата', false);
+INSERT INTO dt_part VALUES ('ws.z_error_info', 1, 'code', 'ws.d_errcode', 'bpchar', false, NULL, '', false);
+INSERT INTO dt_part VALUES ('ws.method_rv_format', 1, 'id', 'ws.d_id32', 'integer', false, NULL, 'ID формата', false);
 INSERT INTO dt_part VALUES ('ws.method_rv_format', 2, 'name', 'text', 'text', false, NULL, 'Название формата', false);
-INSERT INTO dt_part VALUES ('ws.z_method_rvf', 1, 'id', 'ws.d_id32', 'smallint', false, '0', '', false);
+INSERT INTO dt_part VALUES ('ws.z_method_rvf', 1, 'id', 'ws.d_id32', 'integer', false, '0', '', false);
 INSERT INTO dt_part VALUES ('ws.z_method_by_code', 1, 'code', 'ws.d_code', 'text', false, NULL, '', false);
-INSERT INTO dt_part VALUES ('ws.z_method_by_action', 1, 'class_id', 'ws.d_class', 'smallint', false, '0', '', false);
-INSERT INTO dt_part VALUES ('ws.z_method_by_action', 2, 'action_id', 'ws.d_id32', 'smallint', false, '0', '', false);
-INSERT INTO dt_part VALUES ('ws.facet', 1, 'id', 'ws.d_id32', 'smallint', false, NULL, 'ID ограничения', false);
+INSERT INTO dt_part VALUES ('ws.z_method_by_action', 1, 'class_id', 'ws.d_class', 'integer', false, '0', '', false);
+INSERT INTO dt_part VALUES ('ws.z_method_by_action', 2, 'action_id', 'ws.d_id32', 'integer', false, '0', '', false);
+INSERT INTO dt_part VALUES ('ws.facet', 1, 'id', 'ws.d_id32', 'integer', false, NULL, 'ID ограничения', false);
 INSERT INTO dt_part VALUES ('ws.facet', 2, 'code', 'ws.d_codei', 'text', false, NULL, 'Код ограничения', false);
 INSERT INTO dt_part VALUES ('ws.facet', 3, 'anno', 'text', 'text', false, NULL, 'Аннотация', false);
-INSERT INTO dt_part VALUES ('ws.z_facet', 1, 'id', 'ws.d_id32', 'smallint', false, NULL, '', false);
+INSERT INTO dt_part VALUES ('ws.z_facet', 1, 'id', 'ws.d_id32', 'integer', false, NULL, '', false);
 INSERT INTO dt_part VALUES ('ws.dt_facet', 1, 'code', 'ws.d_code', 'text', false, NULL, 'Код типа', false);
-INSERT INTO dt_part VALUES ('ws.dt_facet', 2, 'facet_id', 'ws.d_id32', 'smallint', false, NULL, 'ID ограничения', false);
+INSERT INTO dt_part VALUES ('ws.dt_facet', 2, 'facet_id', 'ws.d_id32', 'integer', false, NULL, 'ID ограничения', false);
 INSERT INTO dt_part VALUES ('ws.dt_facet', 3, 'value', 'text', 'text', false, NULL, 'Значение ограничения', false);
 INSERT INTO dt_part VALUES ('ws.dt_facet', 4, 'base_code', 'ws.d_code', 'text', false, NULL, 'Код базового типа', false);
 INSERT INTO dt_part VALUES ('ws.dt_facet', 5, 'anno', 'text', 'text', true, NULL, 'Аннотация ограничения', false);
@@ -13865,39 +14219,39 @@ INSERT INTO dt_part VALUES ('ws.dt_part', 7, 'def_val', 'text', 'text', true, NU
 INSERT INTO dt_part VALUES ('ws.dt_part', 8, 'anno', 'text', 'text', false, NULL, 'Аннотация', false);
 INSERT INTO dt_part VALUES ('ws.dt_part', 9, 'is_list', 'boolean', 'boolean', false, 'false', 'Конструктор поля - массив', false);
 INSERT INTO dt_part VALUES ('ws.z_dt_part', 1, 'code', 'ws.d_code', 'text', false, NULL, '', false);
-INSERT INTO dt_part VALUES ('ws.z_dt_part', 2, 'part_id', 'ws.d_id32', 'smallint', false, '0', '', false);
-INSERT INTO dt_part VALUES ('ws.csaa', 1, 'class_id', 'ws.d_class', 'smallint', true, NULL, 'ID класса', false);
-INSERT INTO dt_part VALUES ('ws.csaa', 2, 'status_id', 'ws.d_id32', 'smallint', true, NULL, 'ID статуса', false);
-INSERT INTO dt_part VALUES ('ws.csaa', 3, 'action_id', 'ws.d_id32', 'smallint', true, NULL, 'ID акции', false);
-INSERT INTO dt_part VALUES ('ws.csaa', 4, 'acl_id', 'ws.d_acl', 'smallint', true, NULL, 'ID уровня доступа', false);
+INSERT INTO dt_part VALUES ('ws.z_dt_part', 2, 'part_id', 'ws.d_id32', 'integer', false, '0', '', false);
+INSERT INTO dt_part VALUES ('ws.csaa', 1, 'class_id', 'ws.d_class', 'integer', true, NULL, 'ID класса', false);
+INSERT INTO dt_part VALUES ('ws.csaa', 2, 'status_id', 'ws.d_id32', 'integer', true, NULL, 'ID статуса', false);
+INSERT INTO dt_part VALUES ('ws.csaa', 3, 'action_id', 'ws.d_id32', 'integer', true, NULL, 'ID акции', false);
+INSERT INTO dt_part VALUES ('ws.csaa', 4, 'acl_id', 'ws.d_acl', 'integer', true, NULL, 'ID уровня доступа', false);
 INSERT INTO dt_part VALUES ('ws.csaa', 5, 'is_addon', 'boolean', 'boolean', true, NULL, 'Строка является добавлением разрешения', false);
 INSERT INTO dt_part VALUES ('ws.csaa', 6, 'class', 'text', 'text', true, NULL, 'Название класса', false);
 INSERT INTO dt_part VALUES ('ws.csaa', 7, 'status', 'text', 'text', true, NULL, 'Название статуса', false);
 INSERT INTO dt_part VALUES ('ws.csaa', 8, 'action', 'text', 'text', true, NULL, 'Название акции', false);
 INSERT INTO dt_part VALUES ('ws.csaa', 9, 'acl', 'text', 'text', true, NULL, 'Название уровня доступа', false);
-INSERT INTO dt_part VALUES ('ws.z_class_status_action_acl', 1, 'class_id', 'ws.d_class', 'smallint', false, '0', '', false);
-INSERT INTO dt_part VALUES ('ws.z_class_status_action_acl', 2, 'status_id', 'ws.d_id32', 'smallint', false, '0', '', false);
-INSERT INTO dt_part VALUES ('ws.z_class_status_action_acl', 3, 'action_id', 'ws.d_id32', 'smallint', false, '0', '', false);
-INSERT INTO dt_part VALUES ('ws.z_class_status_action_acl', 4, 'acl_id', 'ws.d_id32', 'smallint', false, '0', '', false);
-INSERT INTO dt_part VALUES ('ws.class_action', 1, 'class_id', 'ws.d_class', 'smallint', false, NULL, 'ID класса', false);
-INSERT INTO dt_part VALUES ('ws.class_action', 2, 'id', 'ws.d_id32', 'smallint', false, NULL, 'ID акции', false);
-INSERT INTO dt_part VALUES ('ws.class_action', 3, 'sort', 'ws.d_sort', 'smallint', true, NULL, 'Сортировка в списке акций', false);
+INSERT INTO dt_part VALUES ('ws.z_class_status_action_acl', 1, 'class_id', 'ws.d_class', 'integer', false, '0', '', false);
+INSERT INTO dt_part VALUES ('ws.z_class_status_action_acl', 2, 'status_id', 'ws.d_id32', 'integer', false, '0', '', false);
+INSERT INTO dt_part VALUES ('ws.z_class_status_action_acl', 3, 'action_id', 'ws.d_id32', 'integer', false, '0', '', false);
+INSERT INTO dt_part VALUES ('ws.z_class_status_action_acl', 4, 'acl_id', 'ws.d_id32', 'integer', false, '0', '', false);
+INSERT INTO dt_part VALUES ('ws.class_action', 1, 'class_id', 'ws.d_class', 'integer', false, NULL, 'ID класса', false);
+INSERT INTO dt_part VALUES ('ws.class_action', 2, 'id', 'ws.d_id32', 'integer', false, NULL, 'ID акции', false);
+INSERT INTO dt_part VALUES ('ws.class_action', 3, 'sort', 'ws.d_sort', 'integer', true, NULL, 'Сортировка в списке акций', false);
 INSERT INTO dt_part VALUES ('ws.class_action', 4, 'name', 'text', 'text', false, NULL, 'Название акции', false);
-INSERT INTO dt_part VALUES ('ws.z_class_action', 1, 'class_id', 'ws.d_class', 'smallint', false, '0', '', false);
-INSERT INTO dt_part VALUES ('ws.z_class_action', 2, 'id', 'ws.d_id32', 'smallint', false, '0', '', false);
-INSERT INTO dt_part VALUES ('ws.class_status', 1, 'class_id', 'ws.d_class', 'smallint', false, NULL, 'ID класса', false);
-INSERT INTO dt_part VALUES ('ws.class_status', 2, 'id', 'ws.d_id32', 'smallint', false, NULL, 'ID статуса', false);
-INSERT INTO dt_part VALUES ('ws.class_status', 3, 'sort', 'ws.d_sort', 'smallint', true, NULL, 'Сортировка в списке статусов', false);
+INSERT INTO dt_part VALUES ('ws.z_class_action', 1, 'class_id', 'ws.d_class', 'integer', false, '0', '', false);
+INSERT INTO dt_part VALUES ('ws.z_class_action', 2, 'id', 'ws.d_id32', 'integer', false, '0', '', false);
+INSERT INTO dt_part VALUES ('ws.class_status', 1, 'class_id', 'ws.d_class', 'integer', false, NULL, 'ID класса', false);
+INSERT INTO dt_part VALUES ('ws.class_status', 2, 'id', 'ws.d_id32', 'integer', false, NULL, 'ID статуса', false);
+INSERT INTO dt_part VALUES ('ws.class_status', 3, 'sort', 'ws.d_sort', 'integer', true, NULL, 'Сортировка в списке статусов', false);
 INSERT INTO dt_part VALUES ('ws.class_status', 4, 'name', 'text', 'text', false, NULL, 'Название статуса', false);
-INSERT INTO dt_part VALUES ('ws.z_class_status', 1, 'class_id', 'ws.d_class', 'smallint', false, '0', '', false);
-INSERT INTO dt_part VALUES ('ws.z_class_status', 2, 'id', 'ws.d_id32', 'smallint', false, '0', '', false);
-INSERT INTO dt_part VALUES ('ws.class_acl', 1, 'class_id', 'ws.d_class', 'smallint', false, NULL, 'ID класса', false);
-INSERT INTO dt_part VALUES ('ws.class_acl', 2, 'id', 'ws.d_acl', 'smallint', false, NULL, 'ID уровня доступа', false);
+INSERT INTO dt_part VALUES ('ws.z_class_status', 1, 'class_id', 'ws.d_class', 'integer', false, '0', '', false);
+INSERT INTO dt_part VALUES ('ws.z_class_status', 2, 'id', 'ws.d_id32', 'integer', false, '0', '', false);
+INSERT INTO dt_part VALUES ('ws.class_acl', 1, 'class_id', 'ws.d_class', 'integer', false, NULL, 'ID класса', false);
+INSERT INTO dt_part VALUES ('ws.class_acl', 2, 'id', 'ws.d_acl', 'integer', false, NULL, 'ID уровня доступа', false);
 INSERT INTO dt_part VALUES ('ws.class_acl', 3, 'is_sys', 'boolean', 'boolean', false, NULL, 'Не воказывать в интерфейсе', false);
-INSERT INTO dt_part VALUES ('ws.class_acl', 4, 'sort', 'ws.d_sort', 'smallint', true, NULL, 'Сортировка в списке уровней доступа', false);
+INSERT INTO dt_part VALUES ('ws.class_acl', 4, 'sort', 'ws.d_sort', 'integer', true, NULL, 'Сортировка в списке уровней доступа', false);
 INSERT INTO dt_part VALUES ('ws.class_acl', 5, 'name', 'text', 'text', false, NULL, 'Название уровня доступа', false);
-INSERT INTO dt_part VALUES ('ws.z_class_acl', 1, 'class_id', 'ws.d_class', 'smallint', false, '0', '', false);
-INSERT INTO dt_part VALUES ('ws.z_class_acl', 2, 'id', 'ws.d_id32', 'smallint', false, '0', '', false);
+INSERT INTO dt_part VALUES ('ws.z_class_acl', 1, 'class_id', 'ws.d_class', 'integer', false, '0', '', false);
+INSERT INTO dt_part VALUES ('ws.z_class_acl', 2, 'id', 'ws.d_id32', 'integer', false, '0', '', false);
 INSERT INTO dt_part VALUES ('ws.dt', 1, 'code', 'ws.d_code', 'text', false, NULL, 'Код типа', false);
 INSERT INTO dt_part VALUES ('ws.dt', 2, 'parent_code', 'ws.d_code', 'text', true, NULL, 'Код родительского типа', false);
 INSERT INTO dt_part VALUES ('ws.dt', 3, 'base_code', 'ws.d_code', 'text', true, NULL, 'Код базового типа', false);
@@ -13908,17 +14262,17 @@ INSERT INTO dt_part VALUES ('ws.dt', 7, 'is_list', 'boolean', 'boolean', false, 
 INSERT INTO dt_part VALUES ('ws.dt', 8, 'is_complex', 'boolean', 'boolean', false, 'false', 'Конструктор типа - структура', false);
 INSERT INTO dt_part VALUES ('ws.dt', 9, 'is_sql', 'boolean', 'boolean', false, 'false', 'Тип создан в БД', false);
 INSERT INTO dt_part VALUES ('ws.z_dt', 1, 'code', 'ws.d_code', 'text', true, NULL, '', false);
-INSERT INTO dt_part VALUES ('ws.z_acls_eff_ids', 1, 'class_id', 'ws.d_class', 'smallint', false, NULL, '', false);
-INSERT INTO dt_part VALUES ('ws.z_acls_eff_ids', 2, 'status_id', 'ws.d_id32', 'smallint', false, NULL, '', false);
-INSERT INTO dt_part VALUES ('ws.z_acls_eff_ids', 3, 'action_id', 'ws.d_id32', 'smallint', false, NULL, '', false);
-INSERT INTO dt_part VALUES ('ws.z_acls_eff_ids', 4, 'acl_ids', 'ws.d_acls', 'smallint', false, NULL, '', false);
-INSERT INTO dt_part VALUES ('ws.z_acls_eff', 1, 'class_id', 'ws.d_class', 'smallint', false, NULL, '', false);
-INSERT INTO dt_part VALUES ('ws.z_acls_eff', 2, 'status_id', 'ws.d_id32', 'smallint', false, NULL, '', false);
-INSERT INTO dt_part VALUES ('ws.z_acls_eff', 3, 'action_id', 'ws.d_id32', 'smallint', false, NULL, '', false);
-INSERT INTO dt_part VALUES ('ws.z_acls_eff', 4, 'acl_ids', 'ws.d_acls', 'smallint', false, NULL, '', false);
+INSERT INTO dt_part VALUES ('ws.z_acls_eff_ids', 1, 'class_id', 'ws.d_class', 'integer', false, NULL, '', false);
+INSERT INTO dt_part VALUES ('ws.z_acls_eff_ids', 2, 'status_id', 'ws.d_id32', 'integer', false, NULL, '', false);
+INSERT INTO dt_part VALUES ('ws.z_acls_eff_ids', 3, 'action_id', 'ws.d_id32', 'integer', false, NULL, '', false);
+INSERT INTO dt_part VALUES ('ws.z_acls_eff_ids', 4, 'acl_ids', 'ws.d_acls', 'integer', false, NULL, '', false);
+INSERT INTO dt_part VALUES ('ws.z_acls_eff', 1, 'class_id', 'ws.d_class', 'integer', false, NULL, '', false);
+INSERT INTO dt_part VALUES ('ws.z_acls_eff', 2, 'status_id', 'ws.d_id32', 'integer', false, NULL, '', false);
+INSERT INTO dt_part VALUES ('ws.z_acls_eff', 3, 'action_id', 'ws.d_id32', 'integer', false, NULL, '', false);
+INSERT INTO dt_part VALUES ('ws.z_acls_eff', 4, 'acl_ids', 'ws.d_acls', 'integer', false, NULL, '', false);
 INSERT INTO dt_part VALUES ('ws.z_system_acl', 1, '_sid', 'ws.d_sid', 'text', true, NULL, '', false);
 INSERT INTO dt_part VALUES ('ws.z_info_acl', 1, '_sid', 'ws.d_sid', 'text', false, NULL, '', false);
-INSERT INTO dt_part VALUES ('cfg.z_cache', 1, 'id', 'ws.d_id32', 'smallint', false, '0', '', false);
+INSERT INTO dt_part VALUES ('cfg.z_cache', 1, 'id', 'ws.d_id32', 'integer', false, '0', '', false);
 INSERT INTO dt_part VALUES ('fs.z_file_new_path_mk', 1, 'folder_code', 'text', 'text', false, NULL, '', false);
 INSERT INTO dt_part VALUES ('fs.z_file_new_path_mk', 2, 'obj_id', 'integer', 'integer', false, NULL, 'ID объекта', false);
 INSERT INTO dt_part VALUES ('fs.z_file_new_path_mk', 3, 'name', 'text', 'text', false, NULL, 'Внешнее имя файла', false);
@@ -13993,10 +14347,10 @@ INSERT INTO dt_part VALUES ('wiki.z_acl', 2, '_sid', 'ws.d_sid', 'text', true, N
 INSERT INTO dt_part VALUES ('wiki.z_id_by_code', 1, 'code', 'ws.d_code', 'text', false, NULL, '', false);
 INSERT INTO dt_part VALUES ('wiki.z_doc_id_by_code', 1, 'id', 'ws.d_id', 'integer', false, NULL, 'ID вики', false);
 INSERT INTO dt_part VALUES ('wiki.z_doc_id_by_code', 2, 'code', 'ws.d_path', 'text', false, '', 'Код документа', false);
-INSERT INTO dt_part VALUES ('wiki.z_doc_by_name', 1, 'id', 'ws.d_id32', 'smallint', false, NULL, 'ID wiki', false);
+INSERT INTO dt_part VALUES ('wiki.z_doc_by_name', 1, 'id', 'ws.d_id32', 'integer', false, NULL, 'ID wiki', false);
 INSERT INTO dt_part VALUES ('wiki.z_doc_by_name', 2, 'string', 'text', 'text', false, NULL, '', false);
 INSERT INTO dt_part VALUES ('wiki.z_doc_by_name', 3, 'max_rows', 'ws.d_cnt', 'integer', false, '15', '', false);
-INSERT INTO dt_part VALUES ('wiki.z_keyword_by_name', 1, 'id', 'ws.d_id32', 'smallint', false, NULL, 'ID wiki', false);
+INSERT INTO dt_part VALUES ('wiki.z_keyword_by_name', 1, 'id', 'ws.d_id32', 'integer', false, NULL, 'ID wiki', false);
 INSERT INTO dt_part VALUES ('wiki.z_keyword_by_name', 2, 'string', 'text', 'text', false, NULL, '', false);
 INSERT INTO dt_part VALUES ('wiki.z_keyword_by_name', 3, 'max_rows', 'ws.d_cnt', 'integer', false, '15', '', false);
 INSERT INTO dt_part VALUES ('wiki.doc_info', 1, 'id', 'integer', 'integer', true, NULL, 'id', false);
@@ -14019,12 +14373,12 @@ INSERT INTO dt_part VALUES ('wiki.doc_info', 17, 'updated_by_name', 'text', 'tex
 INSERT INTO dt_part VALUES ('wiki.z_doc_info', 1, 'id', 'ws.d_id', 'integer', false, NULL, 'ID статьи', false);
 INSERT INTO dt_part VALUES ('wiki.z_doc_keyword', 1, 'id', 'ws.d_id', 'integer', false, NULL, 'ID статьи', false);
 INSERT INTO dt_part VALUES ('wiki.z_doc_src', 1, 'id', 'ws.d_id', 'integer', false, NULL, 'ID статьи', false);
-INSERT INTO dt_part VALUES ('wiki.doc_extra', 1, 'id', 'ws.d_id32', 'smallint', false, NULL, 'ID статьи', false);
+INSERT INTO dt_part VALUES ('wiki.doc_extra', 1, 'id', 'ws.d_id32', 'integer', false, NULL, 'ID статьи', false);
 INSERT INTO dt_part VALUES ('wiki.doc_extra', 2, 'is_toc_preferred', 'boolean', 'boolean', false, 'false', 'В кратком списке выводить не аннотацию а содержание', false);
 INSERT INTO dt_part VALUES ('wiki.doc_extra', 3, 'toc', 'text', 'text', true, NULL, 'toc', false);
 INSERT INTO dt_part VALUES ('wiki.doc_extra', 4, 'anno', 'text', 'text', true, NULL, 'anno', false);
 INSERT INTO dt_part VALUES ('wiki.z_doc_extra', 1, 'id', 'ws.d_id', 'integer', false, NULL, 'ID статьи', false);
-INSERT INTO dt_part VALUES ('wiki.doc_link', 1, 'id', 'ws.d_id32', 'smallint', false, NULL, 'ID статьи', false);
+INSERT INTO dt_part VALUES ('wiki.doc_link', 1, 'id', 'ws.d_id32', 'integer', false, NULL, 'ID статьи', false);
 INSERT INTO dt_part VALUES ('wiki.doc_link', 2, 'path', 'text', 'text', false, NULL, 'path', false);
 INSERT INTO dt_part VALUES ('wiki.doc_link', 3, 'is_wiki', 'boolean', 'boolean', false, 'true', 'is_wiki', false);
 INSERT INTO dt_part VALUES ('wiki.doc_link', 4, 'link_id', 'ws.d_id', 'integer', true, NULL, 'link_id', false);
@@ -14076,7 +14430,7 @@ INSERT INTO dt_part VALUES ('wiki.z_doc_update_src', 8, 'toc', 'text', 'text', f
 INSERT INTO dt_part VALUES ('wiki.z_doc_update_src', 9, 'diff', 'text', 'text', false, '', 'Изменения от предыдущей версии', false);
 INSERT INTO dt_part VALUES ('wiki.z_doc_update_attr', 1, '_sid', 'text', 'text', false, NULL, 'ID сессии', false);
 INSERT INTO dt_part VALUES ('wiki.z_doc_update_attr', 2, 'id', 'ws.d_id', 'integer', false, NULL, 'ID статьи', false);
-INSERT INTO dt_part VALUES ('wiki.z_doc_update_attr', 3, 'status_id', 'ws.d_id32', 'smallint', false, NULL, 'ID статуса', false);
+INSERT INTO dt_part VALUES ('wiki.z_doc_update_attr', 3, 'status_id', 'ws.d_id32', 'integer', false, NULL, 'ID статуса', false);
 INSERT INTO dt_part VALUES ('wiki.z_doc_update_attr', 4, 'up_id', 'ws.d_id', 'integer', true, NULL, 'ID статьи-предка', false);
 INSERT INTO dt_part VALUES ('wiki.z_doc_update_attr', 5, 'status_next_id', 'ws.d_id', 'integer', true, NULL, '', false);
 INSERT INTO dt_part VALUES ('wiki.z_doc_update_attr', 6, 'status_next_at', 'ws.d_stamp', 'timestamp', true, NULL, '', false);
@@ -14163,6 +14517,7 @@ INSERT INTO facet_dt_base VALUES (8, 'smallint');
 INSERT INTO facet_dt_base VALUES (9, 'smallint');
 INSERT INTO facet_dt_base VALUES (10, 'smallint');
 INSERT INTO facet_dt_base VALUES (11, 'smallint');
+INSERT INTO facet_dt_base VALUES (1, 'bpchar');
 INSERT INTO facet_dt_base VALUES (4, 'text');
 INSERT INTO facet_dt_base VALUES (4, 'boolean');
 INSERT INTO facet_dt_base VALUES (4, 'numeric');
@@ -14179,6 +14534,7 @@ INSERT INTO facet_dt_base VALUES (4, 'double');
 INSERT INTO facet_dt_base VALUES (4, 'bigint');
 INSERT INTO facet_dt_base VALUES (4, 'json');
 INSERT INTO facet_dt_base VALUES (4, 'uuid');
+INSERT INTO facet_dt_base VALUES (4, 'bpchar');
 
 
 --
@@ -14281,6 +14637,7 @@ INSERT INTO page_data VALUES ('api.map', 'api', 2, 1, NULL, 2, 'docs/pagemap$', 
 INSERT INTO page_data VALUES ('api.xsd', 'api', 2, 1, NULL, 5, 'docs/xsd$', 'apidoc/xsd', NULL, NULL, true, '', 'docs/xsd$', 'docs/xsd', 'apidoc');
 INSERT INTO page_data VALUES ('api.class', 'api', 2, 1, NULL, 1, 'docs/class$', 'apidoc/class', NULL, NULL, true, '', 'docs/class$', 'docs/class', 'apidoc');
 INSERT INTO page_data VALUES ('api.smd1', 'api', 2, 1, NULL, 4, 'docs/smd1$', 'apidoc/smd1', NULL, NULL, true, '', 'docs/smd1$', 'docs/smd1', 'apidoc');
+INSERT INTO page_data VALUES ('api.markup', 'api', 2, 1, NULL, 6, 'docs/markup$', 'apidoc/markup', NULL, NULL, true, '', 'docs/markup$', 'docs/markup', 'apidoc');
 INSERT INTO page_data VALUES ('api.class.single', 'api.class', 2, 1, NULL, NULL, 'docs/class/:i$', 'apidoc/class', NULL, NULL, true, '', 'docs/class/(\d+)$', 'docs/class/%i', 'apidoc');
 INSERT INTO page_data VALUES ('login', 'main', 1, 8, NULL, NULL, 'login$', 'acc/login', NULL, NULL, true, '', 'login$', 'login', 'acc');
 INSERT INTO page_data VALUES ('logout', 'main', 1, 2, NULL, NULL, 'logout$', 'acc/logout', NULL, NULL, true, '', 'logout$', 'logout', 'acc');
@@ -14295,15 +14652,15 @@ INSERT INTO page_data VALUES ('api.test', 'main', 2, 1, NULL, 7, 'docs/test$', '
 -- Data for Name: pkg; Type: TABLE DATA; Schema: ws; Owner: -
 --
 
-INSERT INTO pkg VALUES (1, 'ws', '000', '+', 'jean', '', '', 'apache', NULL, '2013-02-28 20:07:23.619761');
-INSERT INTO pkg VALUES (2, 'apidoc', '000', '+', 'jean', '', '', 'apache', NULL, '2013-02-28 20:07:30.814544');
-INSERT INTO pkg VALUES (3, 'fs', '000', '+', 'jean', '', '', 'apache', NULL, '2013-02-28 20:07:30.814544');
-INSERT INTO pkg VALUES (4, 'ev', '000', '+', 'jean', '', '', 'apache', NULL, '2013-02-28 20:07:30.814544');
-INSERT INTO pkg VALUES (5, 'job', '000', '+', 'jean', '', '', 'apache', NULL, '2013-02-28 20:07:30.814544');
-INSERT INTO pkg VALUES (6, 'acc', '000', '+', 'jean', '', '', 'apache', NULL, '2013-02-28 20:07:30.814544');
-INSERT INTO pkg VALUES (7, 'wiki', '000', '+', 'jean', '', '', 'apache', NULL, '2013-02-28 20:07:30.814544');
-INSERT INTO pkg VALUES (8, 'app', '000', '+', 'jean', '', '', 'apache', NULL, '2013-02-28 20:07:30.814544');
-INSERT INTO pkg VALUES (9, 'i18n', '000', '+', 'jean', '', '', 'apache', NULL, '2013-02-28 20:07:30.814544');
+INSERT INTO pkg VALUES (1, 'ws', '000', '+', 'jean', '', '', 'apache', NULL, '2013-03-18 18:36:52.789853');
+INSERT INTO pkg VALUES (2, 'apidoc', '000', '+', 'jean', '', '', 'apache', NULL, '2013-03-18 18:37:00.438565');
+INSERT INTO pkg VALUES (3, 'fs', '000', '+', 'jean', '', '', 'apache', NULL, '2013-03-18 18:37:00.438565');
+INSERT INTO pkg VALUES (4, 'ev', '000', '+', 'jean', '', '', 'apache', NULL, '2013-03-18 18:37:00.438565');
+INSERT INTO pkg VALUES (5, 'job', '000', '+', 'jean', '', '', 'apache', NULL, '2013-03-18 18:37:00.438565');
+INSERT INTO pkg VALUES (6, 'acc', '000', '+', 'jean', '', '', 'apache', NULL, '2013-03-18 18:37:00.438565');
+INSERT INTO pkg VALUES (7, 'wiki', '000', '+', 'jean', '', '', 'apache', NULL, '2013-03-18 18:37:00.438565');
+INSERT INTO pkg VALUES (8, 'app', '000', '+', 'jean', '', '', 'apache', NULL, '2013-03-18 18:37:00.438565');
+INSERT INTO pkg VALUES (9, 'i18n', '000', '+', 'jean', '', '', 'apache', NULL, '2013-03-18 18:37:00.438565');
 
 
 --
@@ -14317,15 +14674,15 @@ SELECT pg_catalog.setval('pkg_id_seq', 9, true);
 -- Data for Name: pkg_log; Type: TABLE DATA; Schema: ws; Owner: -
 --
 
-INSERT INTO pkg_log VALUES (1, 'ws', '000', '+', 'jean', '', '', 'apache', NULL, '2013-02-28 20:07:23.619761');
-INSERT INTO pkg_log VALUES (2, 'apidoc', '000', '+', 'jean', '', '', 'apache', NULL, '2013-02-28 20:07:30.814544');
-INSERT INTO pkg_log VALUES (3, 'fs', '000', '+', 'jean', '', '', 'apache', NULL, '2013-02-28 20:07:30.814544');
-INSERT INTO pkg_log VALUES (4, 'ev', '000', '+', 'jean', '', '', 'apache', NULL, '2013-02-28 20:07:30.814544');
-INSERT INTO pkg_log VALUES (5, 'job', '000', '+', 'jean', '', '', 'apache', NULL, '2013-02-28 20:07:30.814544');
-INSERT INTO pkg_log VALUES (6, 'acc', '000', '+', 'jean', '', '', 'apache', NULL, '2013-02-28 20:07:30.814544');
-INSERT INTO pkg_log VALUES (7, 'wiki', '000', '+', 'jean', '', '', 'apache', NULL, '2013-02-28 20:07:30.814544');
-INSERT INTO pkg_log VALUES (8, 'app', '000', '+', 'jean', '', '', 'apache', NULL, '2013-02-28 20:07:30.814544');
-INSERT INTO pkg_log VALUES (9, 'i18n', '000', '+', 'jean', '', '', 'apache', NULL, '2013-02-28 20:07:30.814544');
+INSERT INTO pkg_log VALUES (1, 'ws', '000', '+', 'jean', '', '', 'apache', NULL, '2013-03-18 18:36:52.789853');
+INSERT INTO pkg_log VALUES (2, 'apidoc', '000', '+', 'jean', '', '', 'apache', NULL, '2013-03-18 18:37:00.438565');
+INSERT INTO pkg_log VALUES (3, 'fs', '000', '+', 'jean', '', '', 'apache', NULL, '2013-03-18 18:37:00.438565');
+INSERT INTO pkg_log VALUES (4, 'ev', '000', '+', 'jean', '', '', 'apache', NULL, '2013-03-18 18:37:00.438565');
+INSERT INTO pkg_log VALUES (5, 'job', '000', '+', 'jean', '', '', 'apache', NULL, '2013-03-18 18:37:00.438565');
+INSERT INTO pkg_log VALUES (6, 'acc', '000', '+', 'jean', '', '', 'apache', NULL, '2013-03-18 18:37:00.438565');
+INSERT INTO pkg_log VALUES (7, 'wiki', '000', '+', 'jean', '', '', 'apache', NULL, '2013-03-18 18:37:00.438565');
+INSERT INTO pkg_log VALUES (8, 'app', '000', '+', 'jean', '', '', 'apache', NULL, '2013-03-18 18:37:00.438565');
+INSERT INTO pkg_log VALUES (9, 'i18n', '000', '+', 'jean', '', '', 'apache', NULL, '2013-03-18 18:37:00.438565');
 
 
 --
@@ -14353,8 +14710,8 @@ SET search_path = wsd, pg_catalog;
 -- Data for Name: account; Type: TABLE DATA; Schema: wsd; Owner: -
 --
 
-INSERT INTO account VALUES (1, 4, 4, 'admin', 'pgws', 'Admin', true, true, '2013-02-28 20:07:31', '2013-02-28 20:07:31', '2013-02-28 20:07:31');
-INSERT INTO account VALUES (2, 4, 5, 'pgws-job-service', 'change me at config.json and pkg/acc/sql/01_acc/81_wsd.sql', 'Job', true, true, '2013-02-28 20:07:31', '2013-02-28 20:07:31', '2013-02-28 20:07:31');
+INSERT INTO account VALUES (1, 4, 4, 'admin', 'pgws', 'Admin', true, true, '2013-03-18 18:37:00', '2013-03-18 18:37:00', '2013-03-18 18:37:00');
+INSERT INTO account VALUES (2, 4, 5, 'pgws-job-service', 'change me at config.json and pkg/acc/sql/01_acc/81_wsd.sql', 'Job', true, true, '2013-03-18 18:37:00', '2013-03-18 18:37:00', '2013-03-18 18:37:00');
 
 
 --
@@ -14495,14 +14852,14 @@ SELECT pg_catalog.setval('file_id_seq', 1, false);
 -- Data for Name: job; Type: TABLE DATA; Schema: wsd; Owner: -
 --
 
-INSERT INTO job VALUES (1, '2013-02-28 23:50:00', 85800, 9, 2, -2, NULL, NULL, '2013-02-28', NULL, NULL, NULL, NULL, NULL, '2013-02-28 20:07:30.814544', NULL, NULL, NULL, NULL);
+INSERT INTO job VALUES (1, '2013-03-18 23:50:00', 85800, 9, 2, -2, NULL, NULL, '2013-03-18', NULL, NULL, NULL, NULL, NULL, '2013-03-18 18:37:00.438565', NULL, NULL, NULL, NULL);
 
 
 --
 -- Data for Name: job_cron; Type: TABLE DATA; Schema: wsd; Owner: -
 --
 
-INSERT INTO job_cron VALUES (true, '2013-02-28 20:07:30.814544', NULL);
+INSERT INTO job_cron VALUES (true, '2013-03-18 18:37:00.438565', NULL);
 
 
 --
@@ -14534,21 +14891,21 @@ SELECT pg_catalog.setval('job_seq', 25, true);
 -- Data for Name: pkg_script_protected; Type: TABLE DATA; Schema: wsd; Owner: -
 --
 
-INSERT INTO pkg_script_protected VALUES ('ws', '11_wsd.sql', '000', 'ws', '2013-02-28 20:07:23.619761');
-INSERT INTO pkg_script_protected VALUES ('ws', '20_prop_wsd.sql', '000', 'cfg', '2013-02-28 20:07:23.619761');
-INSERT INTO pkg_script_protected VALUES ('ws', '81_prop_owner_wsd.sql', '000', 'cfg', '2013-02-28 20:07:23.619761');
-INSERT INTO pkg_script_protected VALUES ('ws', '83_prop_val_wsd.sql', '000', 'cfg', '2013-02-28 20:07:23.619761');
-INSERT INTO pkg_script_protected VALUES ('fs', '20_wsd.sql', '000', 'fs', '2013-02-28 20:07:30.814544');
-INSERT INTO pkg_script_protected VALUES ('ev', '20_wsd.sql', '000', 'ev', '2013-02-28 20:07:30.814544');
-INSERT INTO pkg_script_protected VALUES ('ev', '82_wsd.sql', '000', 'ev', '2013-02-28 20:07:30.814544');
-INSERT INTO pkg_script_protected VALUES ('job', '20_wsd.sql', '000', 'job', '2013-02-28 20:07:30.814544');
-INSERT INTO pkg_script_protected VALUES ('job', '81_prop_owner_wsd.sql', '000', 'job', '2013-02-28 20:07:30.814544');
-INSERT INTO pkg_script_protected VALUES ('job', '83_prop_val_wsd.sql', '000', 'job', '2013-02-28 20:07:30.814544');
-INSERT INTO pkg_script_protected VALUES ('acc', '20_wsd.sql', '000', 'acc', '2013-02-28 20:07:30.814544');
-INSERT INTO pkg_script_protected VALUES ('acc', '81_wsd.sql', '000', 'acc', '2013-02-28 20:07:30.814544');
-INSERT INTO pkg_script_protected VALUES ('wiki', '20_wsd.sql', '000', 'wiki', '2013-02-28 20:07:30.814544');
-INSERT INTO pkg_script_protected VALUES ('wiki', '81_wsd.sql', '000', 'wiki', '2013-02-28 20:07:30.814544');
-INSERT INTO pkg_script_protected VALUES ('wiki', '82_prop_wsd.sql', '000', 'wiki', '2013-02-28 20:07:30.814544');
+INSERT INTO pkg_script_protected VALUES ('ws', '11_wsd.sql', '000', 'ws', '2013-03-18 18:36:52.789853');
+INSERT INTO pkg_script_protected VALUES ('ws', '20_prop_wsd.sql', '000', 'cfg', '2013-03-18 18:36:52.789853');
+INSERT INTO pkg_script_protected VALUES ('ws', '81_prop_owner_wsd.sql', '000', 'cfg', '2013-03-18 18:36:52.789853');
+INSERT INTO pkg_script_protected VALUES ('ws', '83_prop_val_wsd.sql', '000', 'cfg', '2013-03-18 18:36:52.789853');
+INSERT INTO pkg_script_protected VALUES ('fs', '20_wsd.sql', '000', 'fs', '2013-03-18 18:37:00.438565');
+INSERT INTO pkg_script_protected VALUES ('ev', '20_wsd.sql', '000', 'ev', '2013-03-18 18:37:00.438565');
+INSERT INTO pkg_script_protected VALUES ('ev', '82_wsd.sql', '000', 'ev', '2013-03-18 18:37:00.438565');
+INSERT INTO pkg_script_protected VALUES ('job', '20_wsd.sql', '000', 'job', '2013-03-18 18:37:00.438565');
+INSERT INTO pkg_script_protected VALUES ('job', '81_prop_owner_wsd.sql', '000', 'job', '2013-03-18 18:37:00.438565');
+INSERT INTO pkg_script_protected VALUES ('job', '83_prop_val_wsd.sql', '000', 'job', '2013-03-18 18:37:00.438565');
+INSERT INTO pkg_script_protected VALUES ('acc', '20_wsd.sql', '000', 'acc', '2013-03-18 18:37:00.438565');
+INSERT INTO pkg_script_protected VALUES ('acc', '81_wsd.sql', '000', 'acc', '2013-03-18 18:37:00.438565');
+INSERT INTO pkg_script_protected VALUES ('wiki', '20_wsd.sql', '000', 'wiki', '2013-03-18 18:37:00.438565');
+INSERT INTO pkg_script_protected VALUES ('wiki', '81_wsd.sql', '000', 'wiki', '2013-03-18 18:37:00.438565');
+INSERT INTO pkg_script_protected VALUES ('wiki', '82_prop_wsd.sql', '000', 'wiki', '2013-03-18 18:37:00.438565');
 
 
 --

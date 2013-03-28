@@ -17,7 +17,7 @@
     You should have received a copy of the GNU Affero General Public License
     along with PGWS.  If not, see <http://www.gnu.org/licenses/>.
 
-    Тесты
+    Тесты перехода от dt.id к dt.code
 */
 
 /* ------------------------------------------------------------------------- */
